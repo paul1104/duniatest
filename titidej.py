@@ -837,14 +837,14 @@ while True:
                                         client.sendMessage(msg.to, str(e))
 
                             elif msg.text in ["restart"]:
-	 	                        if msg._from in admin:
-	 	                            client.sendMessage(msg.to, "Tunggu Sebentar..")
-	 	                            client.sendMessage(msg.to, "Bot has been restarted")
-		                            restart_program()
-	                        	else:
-		                            client.sendMessage(msg.to, "No Access")
+                                        if msg._from in admin:
+                                            client.sendMessage(msg.to, "Tunggu Sebentar..")
+                                            client.sendMessage(msg.to, "Bot has been restarted")
+                                            restart_program()
+                                        else:
+                                            client.sendMessage(msg.to, "No Access")
 			
-			    elif "Cek " in msg.text:
+                            elif "Cek " in msg.text:
                                 tanggal = msg.text.replace("Cek ","")
                                 r=requests.get('http://script.google.com/macros/exec?service=AKfycbw7gKzP-WYV2F5mc9RaR7yE3Ve1yN91Tjs91hp_jHSE02dSv9w&nama=ervan&tanggal='+tanggal)
                                 data=r.text
