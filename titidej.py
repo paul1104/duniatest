@@ -612,10 +612,10 @@ while True:
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(msg.to, Oa)
 				
-                            elif text.lower() == "ayat:": 
+                            elif "Ayat:" in msg.text:
                               try:
                                  sep = text.split(" ")
-                                 ayat = text.lower().replace(sep[0] + " ","")
+                                 ayat = text.replace(sep[0] + " ","")
                                  path = "http://islamcdn.com/quran/media/audio/ayah/ar.alafasy/" + ayat
                                  sendMentionV2(msg.to, "@! ini ayat yang kamu cari..", [sender])
                                  client.sendAudioWithURL(msg.to, path)
