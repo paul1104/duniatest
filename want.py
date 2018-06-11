@@ -557,7 +557,7 @@ while True:
                                 client.sendMessage(receiver, "TestSpeed")
                                 elapsed_time = time.time() - start
                                 client.sendMessage(receiver, "%sdetik" % (elapsed_time))
-                            elif 'spic' in text.lower():
+                            elif '/curidp' in text.lower():
                                 try:
                                     key = eval(msg.contentMetadata["MENTION"])
                                     u = key["MENTIONEES"][0]["M"]
@@ -567,68 +567,68 @@ while True:
                                     else:
                                         client.sendImageWithURL(receiver, 'http://dl.profile.line.naver.jp/'+a)
                                 except Exception as e:
-                                    client.sendText(receiver, str(e))
-                            elif 'scover' in text.lower():
+                                    client.sendMessage(receiver, str(e))
+                            elif '/curicover' in text.lower():
                                 try:
                                     key = eval(msg.contentMetadata["MENTION"])
                                     u = key["MENTIONEES"][0]["M"]
                                     a = channel.getProfileCoverURL(mid=u)
                                     client.sendImageWithURL(receiver, a)
                                 except Exception as e:
-                                    client.sendText(receiver, str(e))
+                                    client.sendMessage(receiver, str(e))
                             elif text.lower() == 'tagall':
                                 group = client.getGroup(receiver)
                                 nama = [contact.mid for contact in group.members]
                                 nm1, nm2, nm3, nm4, nm5, jml = [], [], [], [], [], len(nama)
                                 if jml <= 100:
-                                    client.mention(receiver, nama)
+                                    mention(receiver, nama)
                                 if jml > 100 and jml < 200:
                                     for i in range(0, 100):
                                         nm1 += [nama[i]]
-                                    client.mention(receiver, nm1)
+                                    mention(receiver, nm1)
                                     for j in range(101, len(nama)):
                                         nm2 += [nama[j]]
-                                    client.mention(receiver, nm2)
+                                    mention(receiver, nm2)
                                 if jml > 200 and jml < 300:
                                     for i in range(0, 100):
                                         nm1 += [nama[i]]
-                                    client.mention(receiver, nm1)
+                                    mention(receiver, nm1)
                                     for j in range(101, 200):
                                         nm2 += [nama[j]]
-                                    client.mention(receiver, nm2)
+                                    mention(receiver, nm2)
                                     for k in range(201, len(nama)):
                                         nm3 += [nama[k]]
-                                    client.mention(receiver, nm3)
+                                    mention(receiver, nm3)
                                 if jml > 300 and jml < 400:
                                     for i in range(0, 100):
                                         nm1 += [nama[i]]
-                                    client.mention(receiver, nm1)
+                                    mention(receiver, nm1)
                                     for j in range(101, 200):
                                         nm2 += [nama[j]]
-                                    client.mention(receiver, nm2)
+                                    mention(receiver, nm2)
                                     for k in range(201, len(nama)):
                                         nm3 += [nama[k]]
-                                    client.mention(receiver, nm3)
+                                    mention(receiver, nm3)
                                     for l in range(301, len(nama)):
                                         nm4 += [nama[l]]
-                                    client.mention(receiver, nm4)
+                                    mention(receiver, nm4)
                                 if jml > 400 and jml < 501:
                                     for i in range(0, 100):
                                         nm1 += [nama[i]]
-                                    client.mention(receiver, nm1)
+                                    mention(receiver, nm1)
                                     for j in range(101, 200):
                                         nm2 += [nama[j]]
-                                    client.mention(receiver, nm2)
+                                    mention(receiver, nm2)
                                     for k in range(201, len(nama)):
                                         nm3 += [nama[k]]
-                                    client.mention(receiver, nm3)
+                                    mention(receiver, nm3)
                                     for l in range(301, len(nama)):
                                         nm4 += [nama[l]]
-                                    client.mention(receiver, nm4)
+                                    mention(receiver, nm4)
                                     for m in range(401, len(nama)):
                                         nm5 += [nama[m]]
-                                    client.mention(receiver, nm5)             
-                                client.sendText(receiver, "Members :"+str(jml))
+                                    mention(receiver, nm5)             
+                                client.sendMessage(receiver, "Members :"+str(jml))
                             elif text.lower() == 'ceksider':
                                 try:
                                     del cctv['point'][receiver]
@@ -642,13 +642,15 @@ while True:
                             elif text.lower() == 'offread':
                                 if msg.to in cctv['point']:
                                     cctv['cyduk'][receiver]=False
-                                    client.sendText(receiver, cctv['sidermem'][msg.to])
+                                    client.sendMessage(receiver, cctv['sidermem'][msg.to])
                                 else:
-                                    client.sendText(receiver, "Heh belom di Set")
+                                    client.sendMessage(receiver, "Heh belom di Set")
+			      	
+		            e
                 except Exception as e:
                     client.log("[SEND_MESSAGE] ERROR : " + str(e))
 #=================================================================================================================#
-            elif op.type == 55:
+            if op.type == 55:
                 try:
                     if cctv['cyduk'][op.param1]==True:
                         if op.param1 in cctv['point']:
@@ -656,18 +658,168 @@ while True:
                             if Name in cctv['sidermem'][op.param1]:
                                 pass
                             else:
-                                cctv['sidermem'][op.param1] += "\n~ " + Name
-                                pref=['eh ada','hai kak','aloo..','nah','lg ngapain','halo','sini kak']
-                                client.sendText(op.param1, str(random.choice(pref))+' '+Name)
+                                cctv['sidermem'][op.param1] += "\n• " + Name
+                                if " " in Name:
+                                    nick = Name.split(' ')
+                                    if len(nick) == 2:
+                                        sendMentionV2(op.param1, "Haii ☞ @! ☜\nNgintip Aja Niih. . .\nChat Kek Idiih (-__-)", [op.param2])
+                                    else:
+                                        sendMentionV2(op.param1, "Haii ☞ @! ☜\nBetah Banget Jadi Penonton. . .\nChat Napa (-__-)", [op.param2])
+                                else:
+                                    sendMentionV2(op.param1, "Haii ☞ @! ☜\nNgapain Kak Ngintip Aja?\nSini Gabung Chat...", [op.param2])
                         else:
                             pass
                     else:
                         pass
                 except:
                     pass
+ 
+            if op.type == 55:
+                try:
+                    if op.param1 in wait2['readPoint']:
+                        Name = client.getContact(op.param2).displayName
+                        if Name in wait2['readMember'][op.param1]:
+                            pass
+                        else:
+                            wait2['readMember'][op.param1] += "\n・ " + Name + datetime.today().strftime(' [%d - %H:%M:%S]')
+                            wait2['ROM'][op.param1][op.param2] = "・ " + Name
+                            wait2['setTime'][msg.to] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+                    else:
+                        pass
+                except:
+                    pass
+	
+            if op.type == 55:
+	        try:
+	          group_id = op.param1
+	          user_id=op.param2
+	          subprocess.Popen('echo "'+ user_id+'|'+str(op.createdTime)+'" >> dataSeen/%s.txt' % group_id, shell=True, stdout=subprocess.PIPE, )
+	        except Exception as e:
+	         # print e
+		
+            if op.type == 17:
+	            if wait["welcomemsg"] == True:
+	               if op.param2 not in Bots:
+	                     ginfo = client.getGroup(op.param1)
+                             contact = client.getContact(op.param2)
+                             client.sendContact(op.param1, op.param2)
+                             sendMentionV2(op.param1,"Hallo @! \nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nBudayakan Cek Note\nDan Semoga Betah Disini (ﾉ*>∀<)ﾉ♡", [op.param2])  
+			
+            if op.type == 24:
+                if wait["leaveRoom"] == True:
+                    client.leaveRoom(op.param1)
+        
+            if op.type == 26:
+                msg = op.message
+                text = msg.text
+                msg_id = msg.id
+                receiver = msg.to
+                sender = msg._from
+                if msg.contentType == 13:
+                   if wait["wblack"] == True:
+                        if msg.contentMetadata["mid"] in wait["commentBlack"]:
+                            client.sendMessage(msg.to,"already")
+                            wait["wblack"] = False
+                        else:
+                            wait["commentBlack"][msg.contentMetadata["mid"]] = True
+                            wait["wblack"] = False
+                            client.sendMessage(msg.to,"decided not to comment")
+                              
+                   elif wait["dblack"] == True:
+                       if msg.contentMetadata["mid"] in wait["commentBlack"]:
+                            del wait["commentBlack"][msg.contentMetadata["mid"]]
+                            client.sendMessage(msg.to,"deleted")
+                            wait["dblack"] = False
 
-            else:
-                pass
+                       else:
+                            wait["dblack"] = False
+                            client.sendMessage(msg.to,"It is not in the black list")
+                        
+                   elif wait["wblacklist"] == True:
+                       if msg.contentMetadata["mid"] in wait["blacklist"]:
+                            client.sendMessage(msg.to,"already")
+                            client.sendMessage(msg.to,"already")
+                            wait["wblacklist"] = False
+                       else:
+                            wait["blacklist"][msg.contentMetadata["mid"]] = True
+                            wait["wblacklist"] = False
+                            client.sendMessage(msg.to,"aded")
+
+                   elif wait["dblacklist"] == True:
+                       if msg.contentMetadata["mid"] in wait["blacklist"]:
+                            del wait["blacklist"][msg.contentMetadata["mid"]]
+                            client.sendMessage(msg.to,"deleted")
+                            wait["dblacklist"] = False
+
+                       else:
+                            wait["dblacklist"] = False
+                            client.sendMessage(msg.to,"It is not in the black list")
+                        
+                   elif wait["contact"] == True:
+                        msg.contentType = 0
+                        client.sendText(msg.to,msg.contentMetadata["mid"])
+                        if 'displayName' in msg.contentMetadata:
+                            contact = client.getContact(msg.contentMetadata["mid"])
+                            try:
+                                cu = client.channel.getCover(msg.contentMetadata["mid"])
+                            except:
+                                cu = ""
+                            client.sendMessage(msg.to,"⎈ Profile Name :\n" + msg.contentMetadata["displayName"] + "\n\n⎈ Mid :\n" + msg.contentMetadata["mid"] + "\n\n⎈ Status Message :\n" + contact.statusMessage + "\n\n⎈ Pict Status :\nhttp://dl.profile.line-cdn.net/" + contact.pictureStatus + "\n\n⎈ Cover Status :\n" + str(cu))
+                        else:
+                            contact = client.getContact(msg.contentMetadata["mid"])
+                            try:
+                                cu = client.channel.getCover(msg.contentMetadata["mid"])
+                            except:
+                                cu = ""
+                            client.sendMessage(msg.to,"⎈ Profile Name :\n" + msg.contentMetadata["displayName"] + "\n\n⎈ Mid :\n" + msg.contentMetadata["mid"] + "\n\n⎈ Status Message :\n" + contact.statusMessage + "\n\n⎈ Pict Status :\nhttp://dl.profile.line-cdn.net/" + contact.pictureStatus + "\n\n⎈ Cover Status :\n" + str(cu))
+                        
+                elif msg.contentType == 7:
+                    if wait['sticker'] == True:
+                        stk_id = msg.contentMetadata['STKID']
+                        stk_ver = msg.contentMetadata['STKVER']
+                        pkg_id = msg.contentMetadata['STKPKGID']
+                        filler = "『 Sticker Check 』\nSTKID : %s\nSTKPKGID : %s\nSTKVER : %s\n『 Link 』\nline://shop/detail/%s" % (stk_id,pkg_id,stk_ver,pkg_id)
+                        client.sendMessage(msg.to, filler)
+                    else:
+                        pass
+                    
+                elif msg.contentType == 1:
+                	if msg.from_ in admin:
+            	         if msg.toType == 2:
+                                if wait["cpg"] == True:
+                                    path = client.downloadObjectMsgId(msg.id)
+                                    wait["cpg"] = False
+                                    client.updateGroupPicture(msg.to, path)
+                                    client.sendMessage(msg.to,"Foto grup telah di perbaharui !")
+                         if wait["cpp"] == True:
+                            path = client.downloadObjectMsgId(msg.id)
+                            wait["cpp"] = False
+                            client.updateProfilePicture(path)
+                            client.sendMessage(msg.to, "success change profile picture")
+                        
+                elif msg.contentType == 16:
+                    if wait["Timeline"] == True:
+                        msg.contentType = 0
+                        msg.text = "post URL\n" + msg.contentMetadata["postEndUrl"]
+                        client.sendMessage(msg.to,msg.text)
+			
+#-----------INFO GROUP CREATOR---------------#
+                elif msg.text in ["Accept invite"]:
+                    if msg.from_ in admin:
+                        gid = client.getGroupIdsInvited()
+                        _list = ""
+                        for i in gid:
+                            if i is not None:
+                                gids = client.getGroup(i)
+                                _list += gids.name
+                                client.acceptGroupInvitation(i)
+                            else:
+                                break
+                        if gid is not None:
+                            client.sendMessage(msg.to,"Berhasil terima semua undangan dari grup :\n" + _list)
+                        else:
+                            client.sendMessage(msg.to,"Tidak ada grup yang tertunda saat ini")
+			
 #=========================================================================================================================================#
             # Don't remove this line, if you wan't get error soon!
             oepoll.setRevision(op.revision)
