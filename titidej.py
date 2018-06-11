@@ -787,7 +787,7 @@ while True:
                               k = random.choice(kelamin)
                               w = random.choice(wajah)
                               s = random.choice(status)
-                              client.sendMessage(msg.to,"• Nama : "+client.getContact(msg.from_).displayName+"\n• Kelamin : "+k+"\n• Wajah : "+w+"\n• Status Kehidupan : "+s)
+                              client.sendMessage(msg.to,"• Nama : "+client.getContact(msg._from).displayName+"\n• Kelamin : "+k+"\n• Wajah : "+w+"\n• Status Kehidupan : "+s)
 #-------------Fungsi Pap-----------------------------#
                             elif "!say " in msg.text.lower():
                                     query = msg.text.replace("!say ","")
