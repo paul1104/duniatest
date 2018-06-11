@@ -708,7 +708,7 @@ while True:
                                         client.sendMessage(msg.to, str(e))
 			
                             elif "Pcid: " in msg.text:
-            	                txt = msg.text.split(" ")
+                                txt = msg.text.split(" ")
                                 teks = msg.text.replace("Pcid: "+txt[1]+" ","")
                                 x = client.findContactsByUserid(txt[1])
                                 a = client.getContact(msg.from_)
