@@ -674,11 +674,10 @@ while True:
                                 groups = client.getGroupIdsJoined()
                                 for group in groups:               	
                                     G = client.getGroup(group)
-                                    gCreator = G.creator.mid
                                     if len(G.members) <= wait["autoCancel"]["members"]:
                                         Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                         client.sendContact(group, Oa)
-                                        sendMentionV2(group,"мaaғ @! ! мeмвer anda вelυм мencυĸυpι😊 ѕιlaнĸan нυвυngι oa dιaтaѕ!", [gCreator])
+                                        sendMentionV2(group,"мaaғ! мeмвer anda вelυм мencυĸυpι😊 ѕιlaнĸan нυвυngι @! !", [Oa])
                                         client.leaveGroup(group)
 					
                             elif "meme: " in msg.text.lower():
