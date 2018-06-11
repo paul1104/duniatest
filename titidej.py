@@ -617,7 +617,7 @@ while True:
                                  sep = text.split(" ")
                                  ayat = text.lower().replace(sep[0] + " ","")
                                  path = "http://islamcdn.com/quran/media/audio/ayah/ar.alafasy/" + ayat
-				 sendMentionV2(msg.to, "@! ini ayat yang kamu cari..", [sender])
+                                 sendMentionV2(msg.to, "@! ini ayat yang kamu cari..", [sender])
                                  client.sendAudioWithURL(msg.to, path)
                               except Exception as error:
                                  client.sendMessage(msg.to, str(error))
