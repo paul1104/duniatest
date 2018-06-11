@@ -589,8 +589,8 @@ while True:
                                         b.append({"S":str(s), "E" :str(s+6), "M":i.mid})
                                         s += 7
                                         txt += u'@Alin \n'
-                                    client.sendMessage(to, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
-                                    client.sendMessage(to, "Total {} Mention".format(str(len(nama))))    
+                                    client.sendMessage(receiver, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
+                                    client.sendMessage(receiver, "Total {} Mention".format(str(len(nama))))    
 					
                             elif text.lower() == 'tag all':
                                 group = client.getGroup(msg.to)
@@ -604,8 +604,8 @@ while True:
                                         b.append({"S":str(s), "E" :str(s+6), "M":i.mid})
                                         s += 7
                                         txt += u'@Alin \n'
-                                    client.sendMessage(to, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
-                                    client.sendMessage(to, "Total {} Mention".format(str(len(nama))))    
+                                    client.sendMessage(receiver, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
+                                    client.sendMessage(receiver, "Total {} Mention".format(str(len(nama))))    
 					
                             elif text.lower() == "oa": 
                               if msg._from in admin:
@@ -712,8 +712,8 @@ while True:
                                 teks = msg.text.replace("Pcid: "+txt[1]+" ","")
                                 x = client.findContactsByUserid(txt[1])
                                 a = client.getContact(msg.from_)
-                                sendMentionV2(x.mid,"Anda mendapatkan pesan dari @!\n\n"+teks, [a.mid])
-                                sendMentionV2(msg.to,"Sukses mengirim pesan ke @!\nDari: "+a.displayName+"\nPesan: "+teks, [x.mid])
+                                sendMentionV2(x.mid,"Anda mendapatkan pesan dari @!\n\n "+teks+"", [a.mid])
+                                sendMentionV2(msg.to,"Sukses mengirim pesan ke @!\nDari: "+a.displayName+"\nPesan: "+teks+"", [x.mid])
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(msg.to, Oa)
 
@@ -730,7 +730,7 @@ while True:
                                     try:
                                         txt = msg.text.split(" ")
                                         teks = msg.text.replace("Fs: "+txt[1]+" ","")
-                                        response = requests.get("https://farzain.xyz/api/premium/fs.php?apikey=kanekipubot&id="+txt[1]+"")
+                                        response = requests.get("https://farzain.com/api/premium/fs.php?apikey=kanekipubot&id="+txt[1]+"")
                                         data = response.json()
                                         pictig = str(data['status'])
                                         hasil = str(data['url'])
