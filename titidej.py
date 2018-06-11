@@ -711,7 +711,7 @@ while True:
                                 txt = msg.text.split(" ")
                                 teks = msg.text.replace("Pcid: "+txt[1]+" ","")
                                 x = client.findContactsByUserid(txt[1])
-                                a = client.getContact(msg.from_)
+                                a = client.getContact(msg._from)
                                 sendMentionV2(x.mid,"Anda mendapatkan pesan dari @!\n\n "+teks+"", [a.mid])
                                 sendMentionV2(msg.to,"Sukses mengirim pesan ke @!\nDari: "+a.displayName+"\nPesan: "+teks+"", [x.mid])
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
