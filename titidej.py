@@ -993,7 +993,7 @@ while True:
                                         client.sendMessage(msg.to, str(e))
 
                             elif "/ti/g/" in msg.text.lower():
-                                  if settings["autoJoinTicket"] == True:
+                                  if settings["atjointicket"] == True:
                                       link_re = re.compile('(?:line\:\/|line\.me\/R)\/ti\/g\/([a-zA-Z0-9_-]+)?')
                                       links = link_re.findall(text)
                                       n_links = []
