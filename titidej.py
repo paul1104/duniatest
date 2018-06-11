@@ -781,6 +781,270 @@ while True:
 		           
                 except Exception as e:
                     client.log("[SEND_MESSAGE] ERROR : " + str(e))
+		
+#-------------Fungsi Spam Finish---------------------#  
+                            elif "Gimage " in msg.text:
+                                      googl = msg.text.replace("Gimage ","")
+                                      url = 'https://www.google.com/search?hl=en&biw=1366&bih=659&tbm=isch&sa=1&ei=vSD9WYimHMWHvQTg_53IDw&q=' + googl
+                                      raw_html = (download_page(url))
+                                      items = []
+                                      items = items + (_images_get_all_items(raw_html))
+                                      path = random.choice(items)
+                                      try:
+                                          start = time.time()
+                                          client.sendImageWithURL(msg.to,random.choice(items))
+                                          client.sendImageWithURL(msg.to,random.choice(items))
+                                          client.sendImageWithURL(msg.to,random.choice(items))
+                                          client.sendMessage(msg.to,"Total Image Links ="+str(len(items)))
+                                      except Exception as njer:
+		                            client.sendMessage(msg.to, str(njer))
+				
+                            elif "Info saya" in msg.text:
+                              kelamin = ("Waria","Laki-laki","Perempuan","Tidak Diketahui","Bencong")
+                              wajah = ("Standar","Ganteng","Cantik","Beruk","Hancur")
+                              status = ("Menikah","Pacaran","Jones")
+                              k = random.choice(kelamin)
+                              w = random.choice(wajah)
+                              s = random.choice(status)
+                              client.sendMessage(msg.to,"• Nama : "+cl.getContact(msg.from_).displayName+"\n• Kelamin : "+k+"\n• Wajah : "+w+"\n• Status Kehidupan : "+s)
+#-------------Fungsi Pap-----------------------------#
+                            elif "!say " in msg.text.lower():
+                                    query = msg.text.replace("!say ","")
+                                    with requests.session() as s:
+                                        s.headers['user-agent'] = 'Mozilla/5.0'
+                                        url = 'https://google-translate-proxy.herokuapp.com/api/tts'
+                                        params = {'language': 'af', 'speed': '1', 'query': query}
+                                        r = s.get(url, params=params)
+                                        mp3 = r.url
+                                        client.sendAudioWithURL(msg.to, mp3)
+
+                            elif "Surat:" in msg.text.lower():
+                               try:
+                                  sep = msg.text.split(" ")
+                                  surah = int(text.lower().replace(sep[0] + " ",""))
+                                  if 0 < surah < 115:
+                                      if surah not in [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 16, 17, 18, 20, 21, 23, 26, 37]:
+                                          if len(str(surah)) == 1:
+                                              audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-00" + str(surah) + "-muslimcentral.com.mp3"
+					      sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              client.sendAudioWithURL(msg.to, audionya)
+                                          elif len(str(surah)) == 2:
+                                              audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-0" + str(surah) + "-muslimcentral.com.mp3"
+					      sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              client.sendAudioWithURL(msg.to, audionya)
+                                          else:
+                                              audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-" + str(surah) + "-muslimcentral.com.mp3"
+					      sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              client.sendAudioWithURL(msg.to, audionya)
+                                      else:
+                                          sendMentionV2(msg.to, "@! Surah yang kamu minta terlalu panjang", [msg._from])
+                                  else:
+                                      sendMentionV2(msg.to, "@! Quran hanya 114 surah", [msg._from])
+                              except Exception as error:
+                                  client.sendMessage(msg.to, "error\n"+str(error))
+
+                            elif "neon: " in msg.text.lower():
+                                    try:
+                                        txt = msg.text.split(" ")
+                                        teks = msg.text.lower().replace("neon: ","")
+                                        color = ["red","yellow","green","purple","violet","blue"]
+                                        k = random.choice(color)
+                                        foto = "https://ari-api.herokuapp.com/neon?text="+teks+"&color="+k+""
+					sendMentionV2(msg.to, "@! ini foto neon pesanan kamu..", [msg._from])
+                                        client.sendImageWithURL(msg.to, foto)
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+
+                            elif msg.text in ["restart"]:
+	 	                        if msg._from in admin:
+	 	                            client.sendMessage(msg.to, "Tunggu Sebentar..")
+	 	                            client.sendMessage(msg.to, "Bot has been restarted")
+		                            restart_program()
+	                        	else:
+		                            client.sendMessage(msg.to, "No Access")
+			
+			    elif "Cek " in msg.text:
+                                tanggal = msg.text.replace("Cek ","")
+                                r=requests.get('http://script.google.com/macros/exec?service=AKfycbw7gKzP-WYV2F5mc9RaR7yE3Ve1yN91Tjs91hp_jHSE02dSv9w&nama=ervan&tanggal='+tanggal)
+                                data=r.text
+                                data=json.loads(data)
+                                lahir = data["data"]["lahir"]
+                                usia = data["data"]["usia"]
+                                ultah = data["data"]["ultah"]
+                                zodiak = data["data"]["zodiak"]
+                                client.sendMessage(msg.to,"Tanggal Lahir: "+lahir+"\n\nUsia: "+usia+"\n\nUltah: "+ultah+"\n\nZodiak: "+zodiak)
+                
+                            elif "Pict group " in msg.text:
+                                saya = msg.text.replace('Pict group ','')
+                                gid = client.getGroupIdsJoined()
+                                for i in gid:
+                                    h = client.getGroup(i).name
+                                    gna = client.getGroup(i)
+                                    if h == saya:
+                                        client.sendImageWithURL(msg.to,"http://dl.profile.line.naver.jp/"+ gna.pictureStatus)
+                        
+#------------------------CHECK SYSTEM------------------------#    
+                         
+                            elif msg.text.lower().startswith("story "):
+                                            sep = msg.text.replace("story ","")
+                                            url = "http://rahandiapi.herokuapp.com/instastory/"+sep+"?key=betakey"
+                                            with requests.session() as web:
+                                                web.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+                                                r = web.get(url)
+                                                data = r.text
+                                                data = json.loads(data)
+                                                if data["url"] != []:
+                                                    items = data["url"]["link"]
+                                                    client.sendImageWithURL(msg.to, items)
+                                    
+                            elif msg.text.lower().startswith("sholat "):
+                                location = msg.text.replace("sholat ","")
+                                params = {'lokasi':location}
+                                with requests.session() as web:
+                                    r = requests.get("http://api.corrykalam.net/apisholat.php?" + urllib.urlencode(params))                      
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data[1] != "Subuh : " and data[2] != "Dzuhur : " and data[3] != "Ashr : " and data[4] != "Maghrib : " and data[5] != "Isha : ":
+                                        ret_ = "[ Prayer Schedule ]"
+                                        ret_ += "\n\nLocation : " + data[0]
+                                        ret_ += "\n" + data[1]
+                                        ret_ += "\n" + data[2]
+                                        ret_ += "\n" + data[3]               
+                                        ret_ += "\n" + data[4]
+                                        ret_ += "\n" + data[5]
+                                    else:
+                                           ret_ = "[ Prayer Schedule ] Error : Location not found" 
+                                    client.sendMessage(msg.to, str(ret_))
+            
+                            elif msg.text.lower().startswith("lokasi "):
+                                location = msg.text.lower().replace("lokasi ","")
+                                params = {'lokasi':location}
+                                with requests.session() as web:
+                                    web.headers["user-agent"] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+                                    r = requests.get("http://api.corrykalam.net/apiloc.php?"+ urllib.urlencode(params))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data[0] != "" and data[1] != "" and data[2] != "":
+                                        link = "https://www.google.co.id/maps/@{},{},15z".format(str(data[1]), str(data[2]))
+                                        ret_ = "[ Details Location ]"
+                                        ret_ += "\n\nLocation : " + data[0]
+                                        ret_ += "\nGoogle Maps : " + link
+                                    else:
+                                           ret_ = "[ Details Location ] Error : Location not found"
+                                    client.sendMessage(msg.to, str(ret_))
+            
+                            elif msg.text.lower().startswith("twitter "):               
+                                       user = msg.text.lower().replace("twitter ","")
+                                       with requests.session() as s: 
+                                            s.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0' 
+                                            url    = 'https://twitter.com/'+user
+                                            r    = s.get(url)
+                                            soup = BeautifulSoup(r.content, 'html5lib')
+                                            hasil = soup.select_one('.ProfileHeaderCard')
+                                            hasil = hasil.findAll(msg.text)
+                                            tweet = soup.find('span', class_ = 'ProfileNav-value').get_text()
+                                            fllwng = soup.find('li', class_ = 'ProfileNav-item ProfileNav-item--following').get_text()
+                                            fllwr = soup.find('li', class_ = 'ProfileNav-item ProfileNav-item--followers').get_text()
+                                            fav = soup.find('li', class_ = 'ProfileNav-item ProfileNav-item--favorites').get_text()
+                                            img = soup.find('img', class_ = 'ProfileAvatar-image')
+                                            client.sendImageWithURL(msg.to,img['src'])
+                                            client.sendMessage(msg.to,'Name: '+hasil[2]+'\nUsername: '+hasil[7]+hasil[8]+'\nBio: '+hasil[12]+hasil[13]+' '+hasil[15]+hasil[16]+'\nLoc: '+hasil[20]+'\nWeb: '+hasil[26]+'\nJoined: '+hasil[32]+'\nBorn: '+hasil[37])
+                                            client.sendMessage(msg.to,'Tweets: '+tweet+'\nFollowing: '+fllwng.replace('Following','')+'\nFollowers: '+fllwr.replace('Followers','')+'\nLikes:'+fav.replace('Likes',''))
+                            
+                            elif msg.text.lower().startswith("image "):
+                                            sep = msg.text.replace("image ","")
+                                            url = "http://rahandiapi.herokuapp.com/imageapi?key=betakey&q="+sep+""
+                                            with requests.session() as web:
+                                                web.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+                                                r = web.get(url)
+                                                data = r.text
+                                                data = json.loads(data)
+                                                if data["result"] != []:
+                                                    items = data["result"]
+                                                    path = random.choice(items)
+                                                    a = items.index(path)
+                                                    b = len(items)
+                                                    client.sendImageWithURL(msg.to, str(path))
+        
+                            elif msg.text.lower() == "cfotogroup":
+                                if msg._from in admin:
+                                  wait["cpg"] = True
+                                  client.sendMessage(msg.to,"please send an image for group profile.")
+                                else:
+                                	 client.sendMessage(msg.to,"command denied")
+                                	 client.sendMessage(msg.to,"creator permission recuired")
+					
+                            elif msg.text.lower() == "changepict":
+                                if msg._from in admin:
+                                   wait["cpp"] = True
+                                   client.sendMessage(msg.to,"please send an image")
+                                else:
+                                	 client.sendMessage(msg.to,"command denied")
+                                	 client.sendMessage(msg.to,"creator permission recuired")
+			
+                            elif 'ytmp3: ' in text:
+                               url_= text.replace('ytmp3: ','')
+                               params = {'key':'betakey','q':url_}
+                               path = 'http://rahandiapi.herokuapp.com/youtubeapi?'
+                               r = requests.get(path,params=params).json()
+                               client.sendMessage(msg.to, r['result']['audiolist'][4]['url'])
+
+                            elif "/lirik " in msg.text:
+                                    try:
+                                        instagram = msg.text.replace("/lirik ","")
+                                        response = requests.get("http://rahandiapi.herokuapp.com/lyricapi?key=betakey&q="+instagram+"")
+                                        data = response.json()
+                                        pictig = str(data['title'])
+                                        hasil = str(data['lyric'])
+                                        text = "Judul : "+pictig+"\n\n"+hasil+""
+                                        client.sendMessage(msg.to, text)
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+           
+                            elif "Screen " in msg.text:
+                                    try:
+                                        instagram = msg.text.replace("Screen ","")
+                                        response = requests.get("http://rahandiapi.herokuapp.com/sswebAPI?key=betakey&link=www.instagram.com/"+instagram+"")
+                                        data = response.json()
+                                        pictig = data['result']
+                                        client.sendImageWithURL(msg.to, pictig)
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+
+                            elif "/ti/g/" in msg.text:
+                                   if wait["atjointicket"] == True:
+                                  	tiket = msg.text.replace("/ti/g/","")     
+                                        group = client.findGroupByTicket(tiket)
+                                      link_re = re.compile('(?:line\:\/|line\.me\/R)\/ti\/g\/([a-zA-Z0-9_-]+)?')
+                                      links = link_re.findall(text)
+                                      n_links = []
+                                      for l in links:
+                                          if l not in n_links:
+                                              n_links.append(l)
+                                      for ticket_id in n_links:
+                                          group = client.findGroupByTicket(ticket_id)
+                                          client.sendMessage(msg.to, "I've found group name 「%s」 Trying to join" % str(group.name))
+                                          client.acceptGroupInvitationByTicket(group.mid,ticket_id)
+                                          client.sendMessage(msg.to, "Succes to join group 「%s」" % str(group.name))
+                          		
+                            elif msg.text.lower().startswith("cuaca "):
+                                location = msg.text.lower().replace("cuaca ","")
+                                with requests.session() as web:
+                                    web.headers["user-agent"] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+                                    r = web.get("http://api.corrykalam.net/apicuaca.php?kota={}".format(urllib2.quote(location)))
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if "result" not in data:
+                                        ret_ = "╔══『 Status Cuaca 』"
+                                        ret_ += "\n╠ ⌬.「 Lokasi 」 : " + data[0].replace("Temperatur di kota ","")
+                                        ret_ += "\n╠ ⌬.「 Suhu 」 : " + data[1].replace("Suhu : ","")
+                                        ret_ += "\n╠ ⌬.「 Kelembaban 」: " + data[2].replace("Kelembaban : ","")
+                                        ret_ += "\n╠ ⌬.「 Tekanan Udara 」 : " + data[3].replace("Tekanan udara : ","")
+                                        ret_ += "\n╠ ⌬.「 Kecepatan Angin」 : " + data[4].replace("Kecepatan angin : ","")
+                                        ret_ += "\n╚══『 Status Cuaca 』"
+                                    else:
+                                        ret_ = "[ Weather Status ] Error : Lokasi tidak ditemukan"
+                                    client.sendMessage(msg.to, str(ret_))
 #=================================================================================================================#
             if op.type == 55:
                 try:
