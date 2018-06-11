@@ -1003,7 +1003,7 @@ while True:
                                       for ticket_id in n_links:
                                           group = client.findGroupByTicket(ticket_id)
                                           client.acceptGroupInvitationByTicket(group.id,ticket_id)
-                                          client.sendMessage(to, "Berhasil masuk ke group %s" % str(group.name))
+                                          client.sendMessage(msg.to, "Berhasil masuk ke group %s" % str(group.name))
                                               
                             elif msg.text.lower().startswith("cuaca "):
                                 location = msg.text.lower().replace("cuaca ","")
