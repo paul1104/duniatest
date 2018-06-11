@@ -756,7 +756,7 @@ while True:
                                     client.sendMessage(msg.to, "Group Creator : " + gCreator1)
                                     client.sendContact(msg.to, gCreator)
 			
-			    elif text.lower() == 'tagall':
+                            elif text.lower() == 'tagall':
                                 group = client.getGroup(msg.to)
                                 nama = [contact.mid for contact in group.members]
                                 k = len(nama)//100
