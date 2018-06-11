@@ -546,6 +546,7 @@ while True:
                 msg_id = msg.id
                 receiver = msg.to
                 sender = msg._from
+		sendText = sendMessage
                 try:
                     if msg.contentType == 0:
                         if msg.toType == 2:
@@ -831,6 +832,7 @@ while True:
                 msg_id = msg.id
                 receiver = msg.to
                 sender = msg._from
+		sendText = sendMessage
                 if msg.contentType == 13:
                    if wait["wblack"] == True:
                         if msg.contentMetadata["mid"] in wait["commentBlack"]:
