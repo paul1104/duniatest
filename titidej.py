@@ -996,18 +996,18 @@ while True:
                                    if wait["atjointicket"] == True:
                                         tiket = msg.text.replace("/ti/g/","")     
                                         group = client.findGroupByTicket(tiket)
-                                      link_re = re.compile('(?:line\:\/|line\.me\/R)\/ti\/g\/([a-zA-Z0-9_-]+)?')
-                                      links = link_re.findall(text)
-                                      n_links = []
-                                      for l in links:
-                                          if l not in n_links:
-                                              n_links.append(l)
-                                      for ticket_id in n_links:
-                                          group = client.findGroupByTicket(ticket_id)
-                                          client.sendMessage(msg.to, "I've found group name 「%s」 Trying to join" % str(group.name))
-                                          client.acceptGroupInvitationByTicket(group.mid,ticket_id)
-                                          client.sendMessage(msg.to, "Succes to join group 「%s」" % str(group.name))
-                          		
+                                        link_re = re.compile('(?:line\:\/|line\.me\/R)\/ti\/g\/([a-zA-Z0-9_-]+)?')
+                                        links = link_re.findall(text)
+                                        n_links = []
+                                        for l in links:
+                                            if l not in n_links:
+                                                n_links.append(l)
+                                        for ticket_id in n_links:
+                                            group = client.findGroupByTicket(ticket_id)
+                                            client.sendMessage(msg.to, "I've found group name 「%s」 Trying to join" % str(group.name))
+                                            client.acceptGroupInvitationByTicket(group.mid,ticket_id)
+                                            client.sendMessage(msg.to, "Succes to join group 「%s」" % str(group.name))
+                                              
                             elif msg.text.lower().startswith("cuaca "):
                                 location = msg.text.lower().replace("cuaca ","")
                                 with requests.session() as web:
