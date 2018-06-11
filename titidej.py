@@ -546,7 +546,6 @@ while True:
                 msg_id = msg.id
                 receiver = msg.to
                 sender = msg._from
-		sendText = sendMessage
                 try:
                     if msg.contentType == 0:
                         if msg.toType == 2:
@@ -742,7 +741,7 @@ while True:
                                         Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                         client.sendContact(msg.to, Oa)
                                     except Exception as e:
-                                        client.sendText(msg.to, str(e))
+                                        client.sendMessage(msg.to, str(e))
 
                             elif msg.text in ["Gcreator"]:
                               if msg.toType == 2:
@@ -832,7 +831,6 @@ while True:
                 msg_id = msg.id
                 receiver = msg.to
                 sender = msg._from
-		sendText = sendMessage
                 if msg.contentType == 13:
                    if wait["wblack"] == True:
                         if msg.contentMetadata["mid"] in wait["commentBlack"]:
@@ -875,7 +873,7 @@ while True:
                         
                    elif wait["contact"] == True:
                         msg.contentType = 0
-                        client.sendText(msg.to,msg.contentMetadata["mid"])
+                        client.sendMessage(msg.to,msg.contentMetadata["mid"])
                         if 'displayName' in msg.contentMetadata:
                             contact = client.getContact(msg.contentMetadata["mid"])
                             try:
