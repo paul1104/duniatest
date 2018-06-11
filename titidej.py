@@ -778,7 +778,7 @@ while True:
                                           client.sendImageWithURL(msg.to,random.choice(items))
                                           client.sendMessage(msg.to,"Total Image Links ="+str(len(items)))
                                       except Exception as njer:
-		                            client.sendMessage(msg.to, str(njer))
+                                            client.sendMessage(msg.to, str(njer))
 				
                             elif "Info saya" in msg.text:
                               kelamin = ("Waria","Laki-laki","Perempuan","Tidak Diketahui","Bencong")
