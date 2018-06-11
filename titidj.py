@@ -19,6 +19,10 @@ clientMid = client.profile.mid
 clientProfile = client.getProfile()
 clientSettings = client.getSettings()
 client.log("Auth Token : " + str(client.authToken))
+
+channel = LineChannel(client)
+client.log("Channel Access Token : " + str(channel.channelAccessToken))
+
 botStart = time.time()
 
 msg_dict = {}
