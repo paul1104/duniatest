@@ -662,15 +662,23 @@ while True:
                                     except Exception as e:
                                         client.sendMessage(msg.to, str(e))
            
+                            elif msg.text in ["Result"]:
+                                    mE = client.getProfile()
+                                    gT = client.getGroupIdsJoined()
+                                    fT = client.getAllContactIds()
+                                    ginv = client.getGroupIdsInvited()
+                                    client.sendMessage(msg.to,"「"+mE.displayName+"」 \n\nGroup total : " + str(len(gT))+ "\nFriend total: " +str(len(fT))+ "\nPending Group: " + str(len(ginv)))       
+                    
                             elif "detectout" in msg.text:
                                if msg._from in admin:
                                 groups = client.getGroupIdsJoined()
                                 for group in groups:               	
                                     G = client.getGroup(group)
+                                    gCreator = G.creator.mid
                                     if len(G.members) <= wait["autoCancel"]["members"]:
                                         Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                         client.sendContact(group, Oa)
-                                        client.sendMessage(group,"мaaғ! мeмвer anda вelυм мencυĸυpι😊 ѕιlaнĸan нυвυngι oa dιaтaѕ!")
+                                        sendMentionV2(group,"мaaғ @! ! мeмвer anda вelυм мencυĸυpι😊 ѕιlaнĸan нυвυngι oa dιaтaѕ!", [gCreator])
                                         client.leaveGroup(group)
 					
                             elif "meme: " in msg.text.lower():
