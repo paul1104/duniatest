@@ -784,7 +784,7 @@ while True:
                         pass
                     
                 elif msg.contentType == 1:
-                	if msg.from_ in admin:
+                	if msg._from in admin:
             	         if msg.toType == 2:
                                 if wait["cpg"] == True:
                                     path = client.downloadObjectMsgId(msg.id)
@@ -805,7 +805,7 @@ while True:
 			
 #-----------INFO GROUP CREATOR---------------#
                 elif msg.text in ["Accept invite"]:
-                    if msg.from_ in admin:
+                    if msg._from in admin:
                         gid = client.getGroupIdsInvited()
                         _list = ""
                         for i in gid:
