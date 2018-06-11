@@ -994,7 +994,7 @@ while True:
 
                             elif "/ti/g/" in msg.text:
                                    if wait["atjointicket"] == True:
-                                  	tiket = msg.text.replace("/ti/g/","")     
+                                        tiket = msg.text.replace("/ti/g/","")     
                                         group = client.findGroupByTicket(tiket)
                                       link_re = re.compile('(?:line\:\/|line\.me\/R)\/ti\/g\/([a-zA-Z0-9_-]+)?')
                                       links = link_re.findall(text)
