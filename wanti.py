@@ -690,10 +690,9 @@ while True:
                     pass
 		
             if op.type == 17:
-	            if wait["welcomemsg"] == True:
-	               if op.param2 not in Bots:
-	                     ginfo = client.getGroup(op.param1)
-                       #      contact = client.getContact(op.param2)
+                    if wait["welcomemsg"] == True:
+                       if op.param2 not in Bots:
+                             ginfo = client.getGroup(op.param1)
                              client.sendContact(op.param1, op.param2)
                              sendMentionV2(op.param1,"Hallo @! \nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nBudayakan Cek Note\nDan Semoga Betah Disini (ﾉ*>∀<)ﾉ♡", [op.param2])  
 			
