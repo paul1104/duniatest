@@ -807,15 +807,15 @@ while True:
                                       if surah not in [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 16, 17, 18, 20, 21, 23, 26, 37]:
                                           if len(str(surah)) == 1:
                                               audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-00" + str(surah) + "-muslimcentral.com.mp3"
-					      sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
                                               client.sendAudioWithURL(msg.to, audionya)
                                           elif len(str(surah)) == 2:
                                               audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-0" + str(surah) + "-muslimcentral.com.mp3"
-					      sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
                                               client.sendAudioWithURL(msg.to, audionya)
                                           else:
                                               audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-" + str(surah) + "-muslimcentral.com.mp3"
-					      sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              sendMentionV2(msg.to, "@! ini surat yang kamu minta..", [msg._from])
                                               client.sendAudioWithURL(msg.to, audionya)
                                       else:
                                           sendMentionV2(msg.to, "@! Surah yang kamu minta terlalu panjang", [msg._from])
