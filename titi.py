@@ -787,12 +787,7 @@ while True:
                                     wait["cpp"] = False
                                     client.updateProfilePicture(path)
                                     client.sendMessage(msg.to, "success change profile picture")
-                        
-                elif msg.contentType == 16:
-                    if wait["Timeline"] == True:
-                        msg.contentType = 0
-                        msg.text = "post URL\n" + msg.contentMetadata["postEndUrl"]
-                        client.sendMessage(msg.to,msg.text)
+            
 			
 #-----------INFO GROUP CREATOR---------------#
                 elif msg.text in ["Accept invite"]:
