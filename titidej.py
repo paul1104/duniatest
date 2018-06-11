@@ -19,10 +19,7 @@ clientMid = client.profile.mid
 clientProfile = client.getProfile()
 clientSettings = client.getSettings()
 client.log("Auth Token : " + str(client.authToken))
-
-channel = Channel(line, line.server.CHANNEL_ID['LINE_MUSIC'])
-channelToken = channel.getChannelResult()
-client.log("Channel Token : " + str(channelToken))
+client.log("Channel Token : " + str(client.channelToken))
 
 botStart = time.time()
 
@@ -577,7 +574,7 @@ while True:
                                 try:
                                     key = eval(msg.contentMetadata["MENTION"])
                                     u = key["MENTIONEES"][0]["M"]
-                                    a = channel.getProfileCoverURL(mid=u)
+                                    a = client.getProfileCoverURL(mid=u)
                                     client.sendImageWithURL(receiver, a)
                                 except Exception as e:
                                     client.sendMessage(receiver, str(e))
