@@ -646,7 +646,7 @@ while True:
                                 else:
                                     client.sendMessage(receiver, "Heh belom di Set")
 			      	
-		            e
+		           # e
                 except Exception as e:
                     client.log("[SEND_MESSAGE] ERROR : " + str(e))
 #=================================================================================================================#
