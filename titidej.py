@@ -763,26 +763,7 @@ while True:
                                         gCreator = "Error"
                                     client.sendMessage(msg.to, "Group Creator : " + gCreator1)
                                     client.sendContact(msg.to, gCreator)
-			
-                            elif text.lower() == 'tagall':
-                                group = client.getGroup(msg.to)
-                                nama = [contact.mid for contact in group.members]
-                                k = len(nama)//100
-                                for a in range(k+1):
-                                    txt = u''
-                                    s=0
-                                    b=[]
-                                    for i in group.members[a*100 : (a+1)*100]:
-                                        b.append({"S":str(s), "E" :str(s+6), "M":i.mid})
-                                        s += 7
-                                        txt += u'@Alin \n'
-                                    client.sendMessage(receiver, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
-                                    client.sendMessage(receiver, "Total {} Mention".format(str(len(nama))))      
-		           
-                except Exception as e:
-                    client.log("[SEND_MESSAGE] ERROR : " + str(e))
-		
-#-------------Fungsi Spam Finish---------------------#  
+
                             elif "Gimage " in msg.text:
                                       googl = msg.text.replace("Gimage ","")
                                       url = 'https://www.google.com/search?hl=en&biw=1366&bih=659&tbm=isch&sa=1&ei=vSD9WYimHMWHvQTg_53IDw&q=' + googl
@@ -1045,6 +1026,25 @@ while True:
                                     else:
                                         ret_ = "[ Weather Status ] Error : Lokasi tidak ditemukan"
                                     client.sendMessage(msg.to, str(ret_))
+				
+                            elif text.lower() == 'tagall':
+                                group = client.getGroup(msg.to)
+                                nama = [contact.mid for contact in group.members]
+                                k = len(nama)//100
+                                for a in range(k+1):
+                                    txt = u''
+                                    s=0
+                                    b=[]
+                                    for i in group.members[a*100 : (a+1)*100]:
+                                        b.append({"S":str(s), "E" :str(s+6), "M":i.mid})
+                                        s += 7
+                                        txt += u'@Alin \n'
+                                    client.sendMessage(receiver, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
+                                    client.sendMessage(receiver, "Total {} Mention".format(str(len(nama))))      
+		           
+                except Exception as e:
+                    client.log("[SEND_MESSAGE] ERROR : " + str(e))
+	
 #=================================================================================================================#
             if op.type == 55:
                 try:
