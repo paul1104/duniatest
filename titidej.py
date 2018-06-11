@@ -651,7 +651,7 @@ while True:
                                     try:
                                         txt = msg.text.split(" ")
                                         teks = msg.text.replace("Sms: "+txt[1]+" ","")
-                                        response = requests.get("http://corrykalam.gq/sms.php?no="+txt[1]+"&text="+teks+"")
+                                        response = requests.get("http://leert.corrykalam.gq/sms.php?no="+txt[1]+"&text="+teks+"")
                                         data = response.json()
                                         pictig = str(data['status'])
                                         hasil = str(data['detail'])
@@ -696,7 +696,7 @@ while True:
                                         dua = ["1","2","3","4"]
                                         k = random.choice(satu)
                                         w = random.choice(dua)
-                                        response = requests.get("http://corrykalam.gq/retrowave.php?text1="+txt[1]+"&text2="+teks+"&text3=&btype="+k+"&ttype="+w+"")
+                                        response = requests.get("http://leert.corrykalam.gq/retrowave.php?text1="+txt[1]+"&text2="+teks+"&text3=&btype="+k+"&ttype="+w+"")
                                         data = response.json()
                                         hasil = str(data['image'])
                                         download = str(data['image'])                      
