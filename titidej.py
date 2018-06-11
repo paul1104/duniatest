@@ -700,12 +700,12 @@ while True:
                                         data = response.json()
                                         hasil = str(data['image'])
                                         download = str(data['image'])                      
-                                        client.sendMessage(msg.to, download)
-                                        client.sendImageWithURL(msg.to, hasil)
+                                        client.sendMessage(receiver, download)
+                                        client.sendImageWithURL(receiver, hasil)
                                         Oa = 'ud4082219b6754e7b610f84d07d3b436b'
-                                        client.sendContact(msg.to, Oa)
+                                        client.sendContact(receiver, Oa)
                                     except Exception as e:
-                                        client.sendMessage(msg.to, str(e))
+                                        client.sendMessage(receiver, str(e))
 			
                             elif "Pcid: " in msg.text:
                                 txt = msg.text.split(" ")
@@ -768,8 +768,8 @@ while True:
                                         b.append({"S":str(s), "E" :str(s+6), "M":i.mid})
                                         s += 7
                                         txt += u'@Alin \n'
-                                    client.sendMessage(to, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
-                                    client.sendMessage(to, "Total {} Mention".format(str(len(nama))))      
+                                    client.sendMessage(receiver, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
+                                    client.sendMessage(receiver, "Total {} Mention".format(str(len(nama))))      
 		           
                 except Exception as e:
                     client.log("[SEND_MESSAGE] ERROR : " + str(e))
