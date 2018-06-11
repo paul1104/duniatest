@@ -719,7 +719,6 @@ while True:
 
                             elif "Gbcon: " in msg.text:
                               if msg._from in admin:
-                                print "[Group Broadcast Execute]"
                                 n = client.getGroupIdsJoined()   
                                 y = msg.text.split(" ")
                                 k = msg.text.replace("Gbcon: "+y[1]+" ","")
