@@ -20,8 +20,9 @@ clientProfile = client.getProfile()
 clientSettings = client.getSettings()
 client.log("Auth Token : " + str(client.authToken))
 
-channel = LineChannel(client)
-client.log("Channel Access Token : " + str(channel.channelAccessToken))
+channel = Channel(line, line.server.CHANNEL_ID['LINE_MUSIC'])
+channelToken = channel.getChannelResult()
+client.log("Channel Token : " + str(channelToken))
 
 botStart = time.time()
 
