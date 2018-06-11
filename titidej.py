@@ -821,8 +821,8 @@ while True:
                                           sendMentionV2(msg.to, "@! Surah yang kamu minta terlalu panjang", [msg._from])
                                   else:
                                       sendMentionV2(msg.to, "@! Quran hanya 114 surah", [msg._from])
-                              except Exception as error:
-                                  client.sendMessage(msg.to, "error\n"+str(error))
+                               except Exception as error:
+                                   client.sendMessage(msg.to, "error\n"+str(error))
 
                             elif "neon: " in msg.text.lower():
                                     try:
