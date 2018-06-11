@@ -775,18 +775,18 @@ while True:
                         pass
                     
                 elif msg.contentType == 1:
-                	if msg._from in admin:
-            	         if msg.toType == 2:
+                    if msg._from in admin:
+                         if msg.toType == 2:
                                 if wait["cpg"] == True:
                                     path = client.downloadObjectMsgId(msg.id)
                                     wait["cpg"] = False
                                     client.updateGroupPicture(msg.to, path)
                                     client.sendMessage(msg.to,"Foto grup telah di perbaharui !")
-                         if wait["cpp"] == True:
-                            path = client.downloadObjectMsgId(msg.id)
-                            wait["cpp"] = False
-                            client.updateProfilePicture(path)
-                            client.sendMessage(msg.to, "success change profile picture")
+                                if wait["cpp"] == True:
+                                    path = client.downloadObjectMsgId(msg.id)
+                                    wait["cpp"] = False
+                                    client.updateProfilePicture(path)
+                                    client.sendMessage(msg.to, "success change profile picture")
                         
                 elif msg.contentType == 16:
                     if wait["Timeline"] == True:
