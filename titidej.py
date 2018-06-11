@@ -19,7 +19,6 @@ clientMid = client.profile.mid
 clientProfile = client.getProfile()
 clientSettings = client.getSettings()
 client.log("Auth Token : " + str(client.authToken))
-client.log("Channel Token : " + str(client.channelToken))
 
 botStart = time.time()
 
