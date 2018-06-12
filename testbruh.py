@@ -1093,7 +1093,7 @@ def clientBot(op):
                                 x = client.findContactsByUserid(txt[1])
                                 a = client.getContact(msg._from)
                                 sendMention(x.mid,"Anda mendapatkan pesan dari @!\n\n "+teks+"", [a.mid])
-                                sendMention(msg.to,"Sukses mengirim pesan ke @!\nDari: "+a.displayName+"\nPesan: "+teks+"", [x.mid])
+                                sendMention(msg.to,"Sukses mengirim pesan ke "+x.displayName+"\nDari: @!\nPesan: "+teks+"", [a.mid])
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(msg.to, Oa)
 
@@ -1162,10 +1162,10 @@ def clientBot(op):
                               client.sendMessage(msg.to,"• Nama : "+client.getContact(msg._from).displayName+"\n• Kelamin : "+k+"\n• Wajah : "+w+"\n• Status Kehidupan : "+s)
 #-------------Fungsi Pap-----------------------------#
 # Pembatas Script #
-                            elif "surat:" in msg.text.lower():
+                            elif "Surat:" in msg.text:
                                try:
                                   sep = msg.text.split(" ")
-                                  surah = int(text.lower().replace(sep[0] + " ",""))
+                                  surah = int(text.replace(sep[0] + " ",""))
                                   if 0 < surah < 115:
                                       if surah not in [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 16, 17, 18, 20, 21, 23, 26, 37]:
                                           if len(str(surah)) == 1:
