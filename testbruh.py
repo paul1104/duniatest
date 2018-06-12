@@ -813,7 +813,7 @@ def clientBot(op):
                                   for people in n:                	
                                   	client.sendContact(people, Oa)
                         
-                              elif "Gbc " in msg.text:
+                            elif "Gbc " in msg.text:
                                 if msg._from in admin:
                                   bctxt = msg.text.replace("Gbc ","")
                                   n = client.getGroupIdsJoined()                
