@@ -1623,7 +1623,7 @@ def clientBot(op):
                                     client.sendMessage(to, text=txt, contentMetadata={u'MENTION': json.dumps({'MENTIONEES':b})}, contentType=0)
                                     client.sendMessage(to, "Total {} Mention".format(str(len(nama))))  
                             elif cmd == "lurking on":
-                                tz = pytz.timezone("Asia/Makassar")
+                                tz = pytz.timezone("Asia/Jakarta")
                                 timeNow = datetime.now(tz=tz)
                                 day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
                                 hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
@@ -1660,7 +1660,7 @@ def clientBot(op):
                                     read['ROM'][receiver] = {}
                                     client.sendMessage(receiver,"Set reading point : \n" + readTime)
                             elif cmd == "lurking off":
-                                tz = pytz.timezone("Asia/Makassar")
+                                tz = pytz.timezone("Asia/Jakarta")
                                 timeNow = datetime.now(tz=tz)
                                 day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
                                 hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
@@ -1684,7 +1684,7 @@ def clientBot(op):
                                     client.sendMessage(receiver,"Delete reading point : \n" + readTime)
         
                             elif cmd == "lurking reset":
-                                tz = pytz.timezone("Asia/Makassar")
+                                tz = pytz.timezone("Asia/Jakarta")
                                 timeNow = datetime.now(tz=tz)
                                 day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
                                 hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
@@ -1713,7 +1713,7 @@ def clientBot(op):
                                     client.sendMessage(msg.to, "Lurking belum diaktifkan ngapain di reset?")
                                     
                             elif cmd == "lurking":
-                                tz = pytz.timezone("Asia/Makassar")
+                                tz = pytz.timezone("Asia/Jakarta")
                                 timeNow = datetime.now(tz=tz)
                                 day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
                                 hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
@@ -1787,7 +1787,7 @@ def clientBot(op):
                                 r = requests.get("http://leert.corrykalam.gq/praytime.php?location={}".format(location))
                                 data = r.text
                                 data = json.loads(data)
-                                tz = pytz.timezone("Asia/Makassar")
+                                tz = pytz.timezone("Asia/Jakarta")
                                 timeNow = datetime.now(tz=tz)
                                 if data[1] != "Subuh : " and data[2] != "Dzuhur : " and data[3] != "Ashar : " and data[4] != "Maghrib : " and data[5] != "Isya : ":
                                     ret_ = "╔══[ Jadwal Sholat Sekitar " + data[0] + " ]"
@@ -1807,7 +1807,7 @@ def clientBot(op):
                                     r = requests.get("https://farzain.com/api/cuaca.php?id={}".format(location))
                                     data = r.text
                                     data = json.loads(data)
-                                    tz = pytz.timezone("Asia/Makassar")
+                                    tz = pytz.timezone("Asia/Jakarta")
                                     timeNow = datetime.now(tz=tz)
                                     if "result" not in data:
                                         ret_ = "╔══[ Weather Status ]"
