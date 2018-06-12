@@ -21,6 +21,115 @@ botStart = time.time()
 
 msg_dict = {}
 
+wait = {
+    'contact':False,
+    'autoJoin':True,
+    'sticker':False,
+    'autoCancel':{"on":True,"members":10},
+    "spam":{},
+    "detectMention":False,
+    "Members":1,
+    "wordban":{},
+    'leaveRoom':True,
+    'likeOn':True,
+    'comment1':"Auto Like By http://line.me/ti/p/%40ish7215m",
+    'timeline':True,
+    'autoAdd':True,
+    'atjointicket':True,
+    "alwaysRead":True,
+    "linkticket":False,
+    "cpp":False,
+    "cpg":False,
+    'message':"тнαикѕ fσя α∂∂ мє! му ¢яєαтσя ιѕ http://line.me/ti/p/%40ish7215m",
+    "lang":"JP",
+    "comment":"тнαикѕ fσя α∂∂ мє! му ¢яєαтσя ιѕ http://line.me/ti/p/%40ish7215m",
+    "commenty":"Auto Like by кєи кαиєкι\n\nhttp://line.me/ti/p/%40ish7215m",
+    "commentOn":True,
+    "commentBlack":{},
+    "wblack":False,
+    "dblack":False,
+    "clock":False,
+    "cName":" ",
+    "blacklist":{},
+    "whitelist":{},
+    "wblacklist":False,
+    "dblacklist":False,
+    "teman":{},
+    "winvite":False,
+    "likeOn":True,
+    "protection":False,
+    "welcomemsg":True,
+    "welmsg":" welcome to ",
+    "pname":{},
+    "pro_name":{},
+    "Pap":{}
+    }
+
+wait2 = {
+    'readPoint':{},
+    'readMember':{},
+    'setTime':{},
+    'ROM':{}
+    }
+
+settings = {
+    "userAgent": [
+        "Mozilla/5.0 (X11; U; Linux i586; de; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (X11; U; Linux amd64; rv:5.0) Gecko/20100101 Firefox/5.0 (Debian)",
+        "Mozilla/5.0 (X11; U; Linux amd64; en-US; rv:5.0) Gecko/20110619 Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux) Gecko Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 FirePHP/0.5",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux x86_64) Gecko Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux ppc; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (X11; Linux AMD64) Gecko Firefox/5.0",
+        "Mozilla/5.0 (X11; FreeBSD amd64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:5.0) Gecko/20110619 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 6.1.1; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.2; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.1; U; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.1; rv:2.0.1) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.0; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
+        "Mozilla/5.0 (Windows NT 5.0; rv:5.0) Gecko/20100101 Firefox/5.0"
+    ],
+    "timeRestart": "18000",
+    "simiSimi":{},
+    "mimic": {
+        "copy": False,
+        "status": False,
+        "target": {}
+    }
+}
+
+cctv = {
+    "cyduk":{},
+    "point":{},
+    "sidermem":{}
+}    
+   
+hasil = {
+    "result":False,
+    "posts":False,
+    "postInfo":False,
+    "liked":{}
+    }
+    
+wordban = {
+    "kontol":{},
+    "kontl":{},
+    "kntl":{},
+    "memek":{},
+    "anjing":{},
+    "njing":{},
+    "anjeng":{}
+}
+
+setTime = {}
+setTime = wait2['setTime']
+
 settings = {
     "autoAdd": True,
     "autoJoin": True,
@@ -882,7 +991,7 @@ def clientBot(op):
                             elif "Viewlastseen" in msg.text:
                                     if msg.to in wait2['readPoint']:
                                         if wait2["ROM"][msg.to].items() == []:
-                                             client.sendText(msg.to, "Sider:\nNone")
+                                             client.sendMessage(msg.to, "Sider:\nNone")
                                         else:
                                             chiya = []
                                             for rom in wait2["ROM"][msg.to].items():
