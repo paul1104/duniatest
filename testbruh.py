@@ -650,13 +650,14 @@ def clientBot(op):
                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                 client.sendContact(op.param1, Oa)
                 client.findAndAddContactsByMid(op.param1)
-            sendMention(op.param1, "Halo @!,terimakasih telah menambahkan saya sebagai teman :3 silahkan invite bot ini ke grup kamu~")
+            sendMention(op.param1, "Halo @!,terimakasih telah menambahkan saya sebagai teman :3 silahkan invite bot ini ke grup kamu~", [op.param1])
 
         if op.type == 17:
-                    if settings["welcomemsg"] == True:
-                             ginfo = client.getGroup(op.param1)
-                             client.sendContact(op.param1, op.param2)
-                             sendMention(op.param1,"Hallo @! \nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nBudayakan Cek Note\nDan Semoga Betah Disini (ﾉ*>∀<)ﾉ♡", [op.param2])  
+            if settings["welcomemsg"] == True:
+                ginfo = client.getGroup(op.param1)
+		contact = cl.getContact(op.param2)
+                client.sendContact(op.param1, op.param2)
+                sendMention(op.param1,"Hallo @! \nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nBudayakan Cek Note\nDan Semoga Betah Disini (ﾉ*>∀<)ﾉ♡", [op.param2])  
                                 
         if op.type == 13:
             if clientMid in op.param3:
