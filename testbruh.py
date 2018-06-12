@@ -617,7 +617,6 @@ def clientBot(op):
             return
 
         if op.type == 5:
-            print ("[ 5 ] NOTIFIED ADD CONTACT")
             if settings["autoAdd"] == True:
                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                 client.sendContact(op.param1, Oa)
@@ -626,13 +625,11 @@ def clientBot(op):
 
         if op.type == 17:
                     if settings["welcomemsg"] == True:
-                       if op.param2 not in Bots:
                              ginfo = client.getGroup(op.param1)
                              client.sendContact(op.param1, op.param2)
                              sendMention(op.param1,"Hallo @! \nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nBudayakan Cek Note\nDan Semoga Betah Disini (ﾉ*>∀<)ﾉ♡", [op.param2])  
                                 
         if op.type == 13:
-            print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
             if clientMid in op.param3:
                 G = client.getGroup(op.param1)
                 if settings["autoJoin"] == True:
@@ -652,7 +649,6 @@ def clientBot(op):
 
 
         if op.type in [22, 24]:
-            print ("[ 22 And 24 ] NOTIFIED INVITE INTO ROOM & NOTIFIED LEAVE ROOM")
             if settings["autoLeave"] == True:
                 sendMention(op.param1, "Oi asw @!,ngapain invite saya")
                 client.leaveRoom(op.param1)
@@ -821,26 +817,7 @@ def clientBot(op):
                                   for people in n:                	
                                         client.sendMessage(people, bctxt)
                                         client.sendContact(people, Oa)
-                        
-                            elif 'wikipedia ' in msg.text.lower():
-                              try:
-                                  wiki = msg.text.lower().replace("wikipedia ","")
-                                  wikipedia.set_lang("id")
-                                  pesan="Title ("
-                                  pesan+=wikipedia.page(wiki).title
-                                  pesan+=")\n\n"
-                                  pesan+=wikipedia.summary(wiki, sentences=1)
-                                  pesan+="\n"
-                                  pesan+=wikipedia.page(wiki).url
-                                  client.sendMessage(msg.to, pesan)
-                              except:
-                                      try:
-                                          pesan="Over Text Limit! Please Click link\n"
-                                          pesan+=wikipedia.page(wiki).url
-                                          client.sendMessage(msg.to, pesan)
-                                      except Exception as e:
-                                          client.sendMessage(msg.to, str(e))
-                            
+                    
                             elif "Sider on" in msg.text:
                               ginfo = client.getGroup(msg.to)
                               gCreator = ginfo.creator.mid
@@ -945,13 +922,13 @@ def clientBot(op):
                                 text = msg.text.replace("/Spam: " + str(cond[1]) + " " + str(value) + " ","")
                                 ballon1 = value * (text + "\n")
                                 if cond[1] == "on":
-                                    if value <= 10:
+                                    if value <= 20:
                                         for x in range(value):
                                             client.sendMessage(msg.to, text)
                                     else:
                                         client.sendMessage(msg.to,"Jumlah spamming melebihi batas. Max 10")
                                 elif cond[1] == "off":
-                                    if value <= 100:
+                                    if value <= 20:
                                         client.sendMessage(msg.to,ballon1)
                                     else:
                                         client.sendMessage(msg.to,"Jumlah spamming melebihi batas")
@@ -1159,7 +1136,7 @@ def clientBot(op):
                               k = random.choice(kelamin)
                               w = random.choice(wajah)
                               s = random.choice(status)
-                              client.sendMessage(msg.to,"• Nama : "+client.getContact(msg._from).displayName+"\n• Kelamin : "+k+"\n• Wajah : "+w+"\n• Status Kehidupan : "+s)
+                              client.sendMessage(msg.to,"• Nama : @!\n• Kelamin : "+k+"\n• Wajah : "+w+"\n• Status Kehidupan : "+s, [sender])
 #-------------Fungsi Pap-----------------------------#
 # Pembatas Script #
                             elif "Surat:" in msg.text:
@@ -1198,17 +1175,6 @@ def clientBot(op):
                                         client.sendImageWithURL(msg.to, foto)
                                     except Exception as e:
                                         client.sendMessage(msg.to, str(e))
-                                        
-                            elif "cek " in msg.text.lower():
-                                tanggal = msg.text.lower().replace("cek ","")
-                                r=requests.get('http://script.google.com/macros/exec?service=AKfycbw7gKzP-WYV2F5mc9RaR7yE3Ve1yN91Tjs91hp_jHSE02dSv9w&nama=ervan&tanggal='+tanggal)
-                                data=r.text
-                                data=json.loads(data)
-                                lahir = data["data"]["lahir"]
-                                usia = data["data"]["usia"]
-                                ultah = data["data"]["ultah"]
-                                zodiak = data["data"]["zodiak"]
-                                client.sendMessage(msg.to,"Tanggal Lahir: "+lahir+"\n\nUsia: "+usia+"\n\nUltah: "+ultah+"\n\nZodiak: "+zodiak)
                 
                             elif 'ytmp3: ' in text.lower():
                                url_= text.lower().replace('ytmp3: ','')
@@ -2300,10 +2266,10 @@ def clientBot(op):
                    pass
             except Exception as error:
                 logError(error)
-                traceback.print_tb(error.__traceback__)
+                #traceback.print_tb(error.__traceback__)
     except Exception as error:
         logError(error)
-        traceback.print_tb(error.__traceback__)
+        #traceback.print_tb(error.__traceback__)
 
 while True:
     try:
