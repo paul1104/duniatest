@@ -844,6 +844,7 @@ def clientBot(op):
                             elif "Sider on" in msg.text:
                               ginfo = client.getGroup(msg.to)
                               gCreator = ginfo.creator.mid
+		           #   if msg._from in gCreator:
                                 try:
                                     del cctv['point'][msg.to]
                                     del cctv['sidermem'][msg.to]
@@ -859,6 +860,7 @@ def clientBot(op):
                             elif "Sider off" in msg.text:
                               ginfo = client.getGroup(msg.to)
                               gCreator = ginfo.creator.mid
+			   #   if msg._from in gCreator:
                                 if msg.to in cctv['point']:
                                     cctv['cyduk'][msg.to]=False
                                     wait["Sider"] = False
