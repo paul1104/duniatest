@@ -655,7 +655,7 @@ def clientBot(op):
         if op.type == 17:
             if settings["welcomemsg"] == True:
                 ginfo = client.getGroup(op.param1)
-		contact = cl.getContact(op.param2)
+		contact = client.getContact(op.param2)
                 client.sendContact(op.param1, op.param2)
                 sendMention(op.param1,"Hallo @! \nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nBudayakan Cek Note\nDan Semoga Betah Disini (ﾉ*>∀<)ﾉ♡", [op.param2])  
                                 
