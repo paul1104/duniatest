@@ -2178,8 +2178,12 @@ def clientBot(op):
                                         n_links.append(l)
                                 for ticket_id in n_links:
                                     group = client.findGroupByTicket(ticket_id)
-                                    client.acceptGroupInvitationByTicket(group.id,ticket_id)
-                                    client.sendMessage(to, "Berhasil masuk ke group %s" % str(group.name))
+				    if len(group.members) >= 10:
+                                        client.acceptGroupInvitationByTicket(group.id,ticket_id)
+                                        client.sendMessage(to, "Berhasil masuk ke group %s" % str(group.name))
+                                    else:
+					client.sendMessage(to, "Tidak bisa bergabung ke group %s" % str(group.name))
+					
                         if 'MENTION' in msg.contentMetadata.keys()!= None:
                             names = re.findall(r'@(\w+)', text)
                             mention = ast.literal_eval(msg.contentMetadata['MENTION'])
