@@ -2165,8 +2165,8 @@ def clientBot(op):
                 if msg.contentType == 0:
                     try:
                         if msg.to in wait2['readPoint']:
-                            if msg.from_ in wait2["ROM"][msg.to]:
-                                del wait2["ROM"][msg.to][msg.from_]
+                            if msg._from in wait2["ROM"][msg.to]:
+                                del wait2["ROM"][msg.to][msg._from]
                         else:
                             pass
                     except:
