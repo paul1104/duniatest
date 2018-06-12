@@ -699,7 +699,7 @@ def clientBot(op):
 
                             elif "Gbcont" in msg.text:
                                 if msg._from in admin:
-                                  n = cl.getGroupIdsJoined()                
+                                  n = client.getGroupIdsJoined()                
                                   Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                   for people in n:                	
                                   	client.sendContact(people, Oa)
