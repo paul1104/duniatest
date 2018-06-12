@@ -1631,11 +1631,11 @@ def clientBot(op):
                                 settings["changePictureProfile"] = True
                                 client.sendMessage(to, "Silahkan kirim gambarnya")
                             elif cmd == "cgp":
-                              if msg._from in admin:
-                                if msg.toType == 2:
+                              if msg.toType == 2:
                                     if to not in settings["changeGroupPicture"]:
                                         settings["changeGroupPicture"].append(to)
                                     client.sendMessage(to, "Silahkan kirim gambarnya")
+				
                             elif cmd == 'mention':
                                 group = client.getGroup(msg.to)
                                 nama = [contact.mid for contact in group.members]
