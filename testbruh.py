@@ -819,7 +819,7 @@ def clientBot(op):
                                   n = client.getGroupIdsJoined()                
                                   Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                   for people in n:                	
-                                  	client.sendMessage(people, bctxt)
+                                        client.sendMessage(people, bctxt)
                                         client.sendContact(people, Oa)
                         
                             elif 'wikipedia ' in msg.text.lower():
