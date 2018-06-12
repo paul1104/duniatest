@@ -656,7 +656,7 @@ def clientBot(op):
             if settings["welcomemsg"] == True:
                 ginfo = client.getGroup(op.param1)
                 contact = client.getContact(op.param2)
-                client.sendContact(op.param1, op.param2)
+                client.sendContact(op.param1, contact.mid)
                 sendMention(op.param1,"Hallo @! \nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nBudayakan Cek Note\nDan Semoga Betah Disini (ﾉ*>∀<)ﾉ♡", [op.param2])  
                                 
         if op.type == 13:
@@ -1117,6 +1117,16 @@ def clientBot(op):
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(msg.to, Oa)
 
+                            elif "saran: " in msg.text.lower():
+                                txt = msg.text.split(" ")
+                                teks = msg.text.lower().replace("saran: ","")
+                                x = client.findContactsByUserid(u5601bdfbc2c67e7adcb95f790127b193)
+                                a = client.getContact(msg._from)
+                                sendMention(x.mid,"Anda mendapatkan pesan dari @!\n\n Saran:\n"+teks+"", [a.mid])
+                                sendMention(msg.to,"Sukses mengirim saran ke "+x.displayName+"\nDari: @!\nSaran: "+teks+"", [a.mid])
+                                Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                client.sendContact(msg.to, Oa)
+				
                             elif "Gbcon: " in msg.text:
                               if msg._from in admin:
                                 n = client.getGroupIdsJoined()   
