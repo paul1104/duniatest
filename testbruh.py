@@ -25,6 +25,7 @@ settings = {
     "autoAdd": True,
     "autoJoin": True,
     "autoLeave": False,
+    "welcomemsg": True,
     "autoCancel":{"on":True,"members":10},
     "autoRead": True,
     "autoRespon": False,
@@ -56,6 +57,12 @@ read = {
     "readMember": {},
     "readTime": {}
 }
+
+cctv = {
+    "cyduk":{},
+    "point":{},
+    "sidermem":{}
+}   
 
 list_language = {
     "list_textToSpeech": {
@@ -508,6 +515,13 @@ def clientBot(op):
                 client.findAndAddContactsByMid(op.param1)
             sendMention(op.param1, "Halo @!,terimakasih telah menambahkan saya sebagai teman :3 silahkan invite bot ini ke grup kamu~")
 
+        if op.type == 17:
+                    if settings["welcomemsg"] == True:
+                       if op.param2 not in Bots:
+                             ginfo = client.getGroup(op.param1)
+                             client.sendContact(op.param1, op.param2)
+                             sendMention(op.param1,"Hallo @! \nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nBudayakan Cek Note\nDan Semoga Betah Disini (ﾉ*>∀<)ﾉ♡", [op.param2])  
+                                
         if op.type == 13:
             print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
             if clientMid in op.param3:
@@ -583,7 +597,537 @@ def clientBot(op):
                               if msg._from in admin:
                                 client.sendMessage(to, "Berhasil merestart Bot")
                                 restartBot()
+                            
+                            elif cmd == "/curidp":
+                                try:
+                                    key = eval(msg.contentMetadata["MENTION"])
+                                    u = key["MENTIONEES"][0]["M"]
+                                    a = client.getContact(u).pictureStatus
+                                    if client.getContact(u).videoProfile != None:
+                                        client.sendVideoWithURL(receiver, 'http://dl.profile.line.naver.jp/'+a+'/vp.small')
+                                    else:
+                                        client.sendImageWithURL(receiver, 'http://dl.profile.line.naver.jp/'+a)
+                                except Exception as e:
+                                    client.sendMessage(receiver, str(e))
+                                    
+                            elif cmd == "/curicover":
+                                try:
+                                    key = eval(msg.contentMetadata["MENTION"])
+                                    u = key["MENTIONEES"][0]["M"]
+                                    a = client.getProfileCoverURL(mid=u)
+                                    client.sendImageWithURL(receiver, a)
+                                except Exception as e:
+                                    client.sendMessage(receiver, str(e))
+                                    
+                            elif cmd == "oa": 
+                              if msg._from in admin:
+                                Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                client.sendContact(msg.to, Oa)
+                                
+                            elif "ayat:" in msg.text.lower():
+                              try:
+                                 sep = msg.text.split(" ")
+                                 ayat = msg.text.lower().replace(sep[0] + " ","")
+                                 path = "http://islamcdn.com/quran/media/audio/ayah/ar.alafasy/" + ayat
+                                 sendMentionV2(msg.to, "@! ini ayat yang kamu cari..", [sender])
+                                 client.sendAudioWithURL(msg.to, path)
+                              except Exception as error:
+                                 client.sendMessage(msg.to, str(error))
+                                    
+                            elif "jadwal: " in msg.text.lower():
+                                    try:
+                                        txt = msg.text.split(" ")
+                                        teks = msg.text.lower().replace("jadwal: "+txt[1]+" ","")
+                                        response = requests.get("https://farzain.xyz/api/premium/acaratv.php?apikey=kanekipubot&id="+txt[1]+"")
+                                        data = response.json()
+                                        pictig = str(data['status'])
+                                        hasil = str(data['url'])
+                                        text = "Status : "+pictig+"\n"+hasil+""
+                                        client.sendMessage(msg.to, text)
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+   
+                            elif "call: " in msg.text.lower():
+                                no = msg.text.lower().replace("call: ","")
+                                r = requests.get("http://apisora.herokuapp.com/prank/call/?no="+str(no))
+                                data = r.json()
+                                result = data["result"].replace('</br>', '\n')
+                                tgb = "[ Prank Call ]\n\n"
+                                tgb += "Status: "+str(data["status"])+"\n"
+                                tgb += "Result "+str(result)+"\n\n[ Finish ]"
+                                client.sendMessage(msg.to,str(tgb))
+                                Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                client.sendContact(msg.to, Oa)
+		
+                            elif "sms: " in msg.text.lower():
+                                    try:
+                                        txt = msg.text.split(" ")
+                                        teks = msg.text.lower().replace("sms: "+txt[1]+" ","")
+                                        response = requests.get("http://leert.corrykalam.gq/sms.php?no="+txt[1]+"&text="+teks+"")
+                                        data = response.json()
+                                        pictig = str(data['status'])
+                                        hasil = str(data['detail'])
+                                        text = "Status : "+pictig+"\n\n"+hasil+""
+                                        client.sendMessage(msg.to, text)
+                                        Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                        client.sendContact(msg.to, Oa)
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+                                        
+                            elif msg.text in ["Accept invite"]:
+                                if msg._from in admin:
+                                    gid = client.getGroupIdsInvited()
+                                    _list = ""
+                                    for i in gid:
+                                        if i is not None:
+                                            gids = client.getGroup(i)
+                                            _list += gids.name
+                                            client.acceptGroupInvitation(i)
+                                        else:
+                                            break
+                                    if gid is not None:
+                                        client.sendMessage(msg.to,"Berhasil terima semua undangan dari grup :\n" + _list)
+                                    else:
+                                        client.sendMessage(msg.to,"Tidak ada grup yang tertunda saat ini")
+                            
+                            elif msg.text in ["Result"]:
+                                    mE = client.getProfile()
+                                    gT = client.getGroupIdsJoined()
+                                    fT = client.getAllContactIds()
+                                    ginv = client.getGroupIdsInvited()
+                                    client.sendMessage(msg.to,"「"+mE.displayName+"」 \n\nGroup total : " + str(len(gT))+ "\nFriend total: " +str(len(fT))+ "\nPending Group: " + str(len(ginv)))       
+
+                            elif "Gbcont" in msg.text:
+                                if msg._from in admin:
+                                  n = cl.getGroupIdsJoined()                
+                                  Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                  for people in n:                	
+                                  	client.sendContact(people, Oa)
+                        
+                              elif "Gbc " in msg.text:
+                                if msg._from in admin:
+                                  bctxt = msg.text.replace("Gbc ","")
+                                  n = client.getGroupIdsJoined()                
+                                  Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                  for people in n:                	
+                                  	client.sendMessage(people, bctxt)
+                                          client.sendContact(people, Oa)
+                        
+                            elif 'wikipedia ' in msg.text.lower():
+                              try:
+                                  wiki = msg.text.lower().replace("wikipedia ","")
+                                  wikipedia.set_lang("id")
+                                  pesan="Title ("
+                                  pesan+=wikipedia.page(wiki).title
+                                  pesan+=")\n\n"
+                                  pesan+=wikipedia.summary(wiki, sentences=1)
+                                  pesan+="\n"
+                                  pesan+=wikipedia.page(wiki).url
+                                  client.sendMessage(msg.to, pesan)
+                              except:
+                                      try:
+                                          pesan="Over Text Limit! Please Click link\n"
+                                          pesan+=wikipedia.page(wiki).url
+                                          client.sendMessage(msg.to, pesan)
+                                      except Exception as e:
+                                          client.sendMessage(msg.to, str(e))
+                            
+                            elif "Sider on" in msg.text:
+                              ginfo = client.getGroup(msg.to)
+                              gCreator = ginfo.creator.mid
+                                try:
+                                    del cctv['point'][msg.to]
+                                    del cctv['sidermem'][msg.to]
+                                    del cctv['cyduk'][msg.to]
+                                except:
+                                    pass
+                                cctv['point'][msg.to] = msg.id
+                                cctv['sidermem'][msg.to] = ""
+                                cctv['cyduk'][msg.to]=True
+                                wait["Sider"] = True
+                                client.sendMessage(msg.to,"Siap On Cek Sider")
+                
+                            elif "Sider off" in msg.text:
+                              ginfo = client.getGroup(msg.to)
+                              gCreator = ginfo.creator.mid
+                                if msg.to in cctv['point']:
+                                    cctv['cyduk'][msg.to]=False
+                                    wait["Sider"] = False
+                                    client.sendMessage(msg.to, "Cek Sider Off")
+                                else:
+                                    client.sendMessage(msg.to, "Heh Belom Di Set")
+                    
+                            elif "Sider on" in msg.text:
+                                try:
+                                    del cctv['point'][msg.to]
+                                    del cctv['sidermem'][msg.to]
+                                    del cctv['cyduk'][msg.to]
+                                except:
+                                    pass
+                                cctv['point'][msg.to] = msg.id
+                                cctv['sidermem'][msg.to] = ""
+                                cctv['cyduk'][msg.to]=True
+                                wait["Sider"] = True
+                                client.sendMessage(msg.to,"Siap On Cek Sider")
+                
+                            elif "Sider off" in msg.text:
+                                if msg.to in cctv['point']:
+                                    cctv['cyduk'][msg.to]=False
+                                    wait["Sider"] = False
+                                    client.sendMessage(msg.to, "Cek Sider Off")
+                                else:
+                                    client.sendMessage(msg.to, "Heh Belom Di Set")
+                    
+                            elif text.lower() == '/about':
+                                    try:
+                                        arr = []
+                                        owner = "ud4082219b6754e7b610f84d07d3b436b"
+                                        creator = client.getContact(owner)
+                                        contact = client.getContact(owner)
+                                        grouplist = client.getGroupIdsJoined()
+                                        contactlist = client.getAllContactIds()
+                                        blockedlist = client.getBlockedContactIds()
+                                        ret_ = "╔══[ About Public Bot ]"
+                                        ret_ += "\n╠ Line : {}".format(contact.displayName)
+                                        ret_ += "\n╠ Group : {}".format(str(len(grouplist)))
+                                        ret_ += "\n╠ Friend : {}".format(str(len(contactlist)))
+                                        ret_ += "\n╠ Blocked : {}".format(str(len(blockedlist)))
+                                        ret_ += "\n╠═══════"
+                                        ret_ += "\n╠ Version : Public Bot 1"
+                                        ret_ += "\n╠ Creator : {}".format(creator.displayName)
+                                        ret_ += "\n╚═══════"
+                                        client.sendMessage(msg.to, str(ret_))
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+                                        
+                            elif msg.text.lower() in ["hi","hai","apa","P"]:
+                                  sendMention(msg.to, "Hi @! sayang", [sender])
+                                    
+                            elif "/removechat" in msg.text.lower():
+                                if msg._from in admin:
+                                    try:
+                                        client.removeAllMessages(op.param2)
+                                        client.sendMessage(msg.to,"Done")
+                                    except Exception as error:
+                                        client.sendMessage(msg.to,"Error")
+                        
+                            elif "Apakah " in msg.text:
+                                tanya = msg.text.replace("Apakah ","")
+                                jawab = ("Ya","Tidak")
+                                jawaban = random.choice(jawab)
+                                client.sendMessage(msg.to,jawaban)
+            
+#----------------------
+                            elif "Dosa @" in msg.text:
+                                tanya = msg.text.replace("Dosa @","")
+                                jawab = ("60%","70%","80%","90%","100%","Tak terhingga")
+                                jawaban = random.choice(jawab)
+                                client.sendMessage(msg.to,"Dosanya " + tanya + "adalah " + jawaban + " Banyak banyak tobat Nak ")
+#----------------------
+	                        elif "Pahala @" in msg.text:
+                                tanya = msg.text.replace("Pahala @","")
+                                jawab = ("0%","20%","40%","50%","60%","Tak ada")
+                                jawaban = random.choice(jawab)
+                                client.sendMessage(msg.to,"Pahalanya " + tanya + "adalah " + jawaban + "\nTobatlah nak")
+                
+                            elif "/Spam: " in msg.text:
+                                cond = msg.text.split(" ")
+                                value = int(cond[2])
+                                text = msg.text.replace("/Spam: " + str(cond[1]) + " " + str(value) + " ","")
+                                ballon1 = value * (text + "\n")
+                                if cond[1] == "on":
+                                    if value <= 10:
+                                        for x in range(value):
+                                            client.sendMessage(msg.to, text)
+                                    else:
+                                        client.sendMessage(msg.to,"Jumlah spamming melebihi batas. Max 10")
+                                elif cond[1] == "off":
+                                    if value <= 100:
+                                        client.sendMessage(msg.to,ballon1)
+                                    else:
+                                        client.sendMessage(msg.to,"Jumlah spamming melebihi batas")
+                                else:
+                                    client.sendMessage(msg.to,"Error condition")
+                        
+                            elif "Setlastpoint" in msg.text:
+                                if msg.to in wait2['readPoint']:
+                                        try:
+                                            del wait2['readPoint'][msg.to]
+                                            del wait2['readMember'][msg.to]
+                                            del wait2['setTime'][msg.to]
+                                        except:
+                                            pass
+                                        wait2['readPoint'][msg.to] = msg.id
+                                        wait2['readMember'][msg.to] = ""
+                                        wait2['setTime'][msg.to] = datetime.now().strftime('%H:%M:%S')
+                                        wait2['ROM'][msg.to] = {}
+                                        with open('sider.json', 'w') as fp:
+                                         json.dump(wait2, fp, sort_keys=True, indent=4)
+                                         client.sendMessage(msg.to,"Set the lastseens' point(｀・ω・´)\n\n" + datetime.now().strftime('%H:%M:%S'))
+                                else:
+                                    try:
+                                            del wait2['readPoint'][msg.to]
+                                            del wait2['readMember'][msg.to]
+                                            del wait2['setTime'][msg.to]
+                                    except:
+                                          pass
+                                    wait2['readPoint'][msg.to] = msg.id
+                                    wait2['readMember'][msg.to] = ""
+                                    wait2['setTime'][msg.to] = datetime.now().strftime('%H:%M:%S')
+                                    wait2['ROM'][msg.to] = {}
+                                    with open('sider.json', 'w') as fp:
+                                     json.dump(wait2, fp, sort_keys=True, indent=4)
+                                     client.sendMessage(msg.to, "Set reading point:\n" + datetime.now().strftime('%H:%M:%S'))
+                    
+                            elif "Viewlastseen" in msg.text:
+                                    if msg.to in wait2['readPoint']:
+                                        if wait2["ROM"][msg.to].items() == []:
+                                             client.sendText(msg.to, "Sider:\nNone")
+                                        else:
+                                            chiya = []
+                                            for rom in wait2["ROM"][msg.to].items():
+                                                chiya.append(rom[1])
+                               
+                                            cmem = client.getContacts(chiya)
+                                            zx = ""
+                                            zxc = ""
+                                            zx2 = []
+                                            xpesan = 'Lurkers:\n'
+                                        for x in range(len(cmem)):
+                                                xname = str(cmem[x].displayName)
+                                                pesan = ''
+                                                pesan2 = pesan+"@a\n"
+                                                xlen = str(len(zxc)+len(xpesan))
+                                                xlen2 = str(len(zxc)+len(pesan2)+len(xpesan)-1)
+                                                zx = {'S':xlen, 'E':xlen2, 'M':cmem[x].mid}
+                                                zx2.append(zx)
+                                                zxc += pesan2
+                                                msg.contentType = 0
+          
+                                        msg.text = xpesan+ zxc + "\nLurking time: %s\nCurrent time: %s"%(wait2['setTime'][msg.to],datetime.now().strftime('%H:%M:%S'))
+                                        lol ={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}
+                                        msg.contentMetadata = lol
+                                        try:
+                                          client.sendMessage(msg)
+                                        except Exception as error:
+                                              pass
+                                        pass
+               
+           
+                                    else:
+                                        client.sendMessage(msg.to, "Lurking has not been set.")
+                    
+                            elif "/keluar" in msg.text:
+                                if msg.toType == 2:
+                                    ginfo = client.getGroup(msg.to)
+                                    try:
+                                        Oa= 'ud4082219b6754e7b610f84d07d3b436b'
+                                        client.sendContact(msg.to, Oa)
+                                        client.leaveGroup(msg.to)
+                                    except:
+                                        pass
+                                    
+                            elif msg.text in ["Woy","woy","Woi","woi","bot","Bot"]:
+                                 quote = ['Istri yang baik itu Istri yang Mengizinkan Suaminya untuk Poligami 😂😂😂.','Kunci Untuk Bikin Suami Bahagia itu cuma satu..\nIzinkan Suamimu Untuk Selingkuh Coyyy ','Ah Kupret Lu','Muka Lu Kaya Jamban','Ada Orang kah disini?','Sange Euy','Ada Perawan Nganggur ga Coy?']
+                                 psn = random.choice(quote)
+                                 client.sendMessage(msg.to,psn)
+                
+                            elif "detectout" in msg.text:
+                               if msg._from in admin:
+                                groups = client.getGroupIdsJoined()
+                                for group in groups:               	
+                                    G = client.getGroup(group)
+                                    if len(G.members) <= wait["autoCancel"]["members"]:
+                                        Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                        owner = 'u5601bdfbc2c67e7adcb95f790127b193'
+                                        client.sendContact(group, Oa)
+                                        client.sendMessage(group,"мaaғ! мeмвer anda вelυм мencυĸυpι😊 ѕιlaнĸan нυвυngι oa dιaтaѕ!")
+                                        client.leaveGroup(group)
+					
+                            elif "meme: " in msg.text.lower():
+                                    try:
+                                        txt = msg.text.split(" ")
+                                        teks = msg.text.lower().replace("meme: "+txt[1]+" ","")
+                                        data = []
+                                        r = requests.get("http://ofckaneki.dynu.net/bot.php")
+                                        r = eval(r.text)
+                                        for a in r:
+                                            data.append(a)
+                                        c = random.choice(data)
+                                        foto = "https://memegen.link/"+c+"/"+txt[1]+"/"+teks+".jpg"
+                                        client.sendImageWithURL(msg.to, foto)
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+                                        
+                            elif "retro: " in msg.text.lower():
+                                    try:
+                                        txt = msg.text.split(" ")
+                                        teks = msg.text.lower().replace("retro: "+txt[1]+" ","")
+                                        satu = ["1","2","3","4","5"]
+                                        dua = ["1","2","3","4"]
+                                        k = random.choice(satu)
+                                        w = random.choice(dua)
+                                        response = requests.get("http://leert.corrykalam.gq/retrowave.php?text1="+txt[1]+"&text2="+teks+"&text3=&btype="+k+"&ttype="+w+"")
+                                        data = response.json()
+                                        hasil = str(data['image'])
+                                        download = str(data['image'])                      
+                                        client.sendMessage(receiver, download)
+                                        client.sendImageWithURL(receiver, hasil)
+                                        Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                        client.sendContact(receiver, Oa)
+                                    except Exception as e:
+                                        client.sendMessage(receiver, str(e))
+			
+                            elif "pcid: " in msg.text.lower():
+                                txt = msg.text.split(" ")
+                                teks = msg.text.lower().replace("pcid: "+txt[1]+" ","")
+                                x = client.findContactsByUserid(txt[1])
+                                a = client.getContact(msg._from)
+                                sendMentionV2(x.mid,"Anda mendapatkan pesan dari @!\n\n "+teks+"", [a.mid])
+                                sendMentionV2(msg.to,"Sukses mengirim pesan ke @!\nDari: "+a.displayName+"\nPesan: "+teks+"", [x.mid])
+                                Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                client.sendContact(msg.to, Oa)
+
+                            elif "Gbcon: " in msg.text:
+                              if msg._from in admin:
+                                n = client.getGroupIdsJoined()   
+                                y = msg.text.split(" ")
+                                k = msg.text.replace("Gbcon: "+y[1]+" ","")
+                                Oa = y[1]
+                                for people in n:                	
+                                	client.sendContact(people, Oa)
+
+                            elif "fs: " in msg.text.lower():
+                                    try:
+                                        txt = msg.text.split(" ")
+                                        teks = msg.text.lower().replace("fs: "+txt[1]+" ","")
+                                        response = requests.get("https://farzain.com/api/premium/fs.php?apikey=kanekipubot&id="+txt[1]+"")
+                                        data = response.json()
+                                        pictig = str(data['status'])
+                                        hasil = str(data['url'])
+                                        text = "Status : "+pictig+""
+                                        client.sendMessage(msg.to, text)
+                                        client.sendImageWithURL(msg.to, hasil)
+                                        Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+                                        client.sendContact(msg.to, Oa)
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+
+                            elif msg.text.lower() in ["gcreator"]:
+                              if msg.toType == 2:
+                                    msg.contentType = 13
+                                    ginfo = client.getGroup(msg.to)
+                                    gCreator = ginfo.creator.mid
+                                    try:
+                                        msg.contentMetadata = {'mid': gCreator}
+                                        gCreator1 = ginfo.creator.displayName
+                        
+                                    except:
+                                        gCreator = "Error"
+                                    client.sendMessage(msg.to, "Group Creator : " + gCreator1)
+                                    client.sendContact(msg.to, gCreator)
+
+                            elif "gimage " in msg.text.lower():
+                                      googl = msg.text.lower().replace("gimage ","")
+                                      url = 'https://www.google.com/search?hl=en&biw=1366&bih=659&tbm=isch&sa=1&ei=vSD9WYimHMWHvQTg_53IDw&q=' + googl
+                                      raw_html = (download_page(url))
+                                      items = []
+                                      items = items + (_images_get_all_items(raw_html))
+                                      path = random.choice(items)
+                                      try:
+                                          start = time.time()
+                                          client.sendImageWithURL(msg.to,random.choice(items))
+                                          client.sendImageWithURL(msg.to,random.choice(items))
+                                          client.sendImageWithURL(msg.to,random.choice(items))
+                                          client.sendMessage(msg.to,"Total Image Links ="+str(len(items)))
+                                      except Exception as njer:
+                                            client.sendMessage(msg.to, str(njer))
+				
+                            elif "info saya" in msg.text.lower():
+                              kelamin = ("Waria","Laki-laki","Perempuan","Tidak Diketahui","Bencong")
+                              wajah = ("Standar","Ganteng","Cantik","Beruk","Hancur")
+                              status = ("Menikah","Pacaran","Jones")
+                              k = random.choice(kelamin)
+                              w = random.choice(wajah)
+                              s = random.choice(status)
+                              client.sendMessage(msg.to,"• Nama : "+client.getContact(msg._from).displayName+"\n• Kelamin : "+k+"\n• Wajah : "+w+"\n• Status Kehidupan : "+s)
+#-------------Fungsi Pap-----------------------------#
 # Pembatas Script #
+                            elif "surat:" in msg.text.lower():
+                               try:
+                                  sep = msg.text.split(" ")
+                                  surah = int(text.lower().replace(sep[0] + " ",""))
+                                  if 0 < surah < 115:
+                                      if surah not in [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 16, 17, 18, 20, 21, 23, 26, 37]:
+                                          if len(str(surah)) == 1:
+                                              audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-00" + str(surah) + "-muslimcentral.com.mp3"
+                                              sendMention(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              client.sendAudioWithURL(msg.to, audionya)
+                                          elif len(str(surah)) == 2:
+                                              audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-0" + str(surah) + "-muslimcentral.com.mp3"
+                                              sendMention(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              client.sendAudioWithURL(msg.to, audionya)
+                                          else:
+                                              audionya = "https://audio5.qurancentral.com/mishary-rashid-alafasy/mishary-rashid-alafasy-" + str(surah) + "-muslimcentral.com.mp3"
+                                              sendMention(msg.to, "@! ini surat yang kamu minta..", [msg._from])
+                                              client.sendAudioWithURL(msg.to, audionya)
+                                      else:
+                                          sendMention(msg.to, "@! Surah yang kamu minta terlalu panjang", [msg._from])
+                                  else:
+                                      sendMention(msg.to, "@! Quran hanya 114 surah", [msg._from])
+                               except Exception as error:
+                                   client.sendMessage(msg.to, "error\n"+str(error))
+                              
+                            elif "neon: " in msg.text.lower():
+                                    try:
+                                        txt = msg.text.split(" ")
+                                        teks = msg.text.lower().replace("neon: ","")
+                                        color = ["red","yellow","green","purple","violet","blue"]
+                                        k = random.choice(color)
+                                        foto = "https://ari-api.herokuapp.com/neon?text="+teks+"&color="+k+""
+                                        sendMention(msg.to, "@! ini foto neon pesanan kamu..", [msg._from])
+                                        client.sendImageWithURL(msg.to, foto)
+                                    except Exception as e:
+                                        client.sendMessage(msg.to, str(e))
+                                        
+                            elif "cek " in msg.text.lower():
+                                tanggal = msg.text.lower().replace("cek ","")
+                                r=requests.get('http://script.google.com/macros/exec?service=AKfycbw7gKzP-WYV2F5mc9RaR7yE3Ve1yN91Tjs91hp_jHSE02dSv9w&nama=ervan&tanggal='+tanggal)
+                                data=r.text
+                                data=json.loads(data)
+                                lahir = data["data"]["lahir"]
+                                usia = data["data"]["usia"]
+                                ultah = data["data"]["ultah"]
+                                zodiak = data["data"]["zodiak"]
+                                client.sendMessage(msg.to,"Tanggal Lahir: "+lahir+"\n\nUsia: "+usia+"\n\nUltah: "+ultah+"\n\nZodiak: "+zodiak)
+                
+                            elif 'ytmp3: ' in text.lower():
+                               url_= text.lower().replace('ytmp3: ','')
+                               params = {'key':'betakey','q':url_}
+                               path = 'http://rahandiapi.herokuapp.com/youtubeapi?'
+                               r = requests.get(path,params=params).json()
+                               client.sendMessage(msg.to, r['result']['audiolist'][4]['url'])
+                            
+                            
+                            elif msg.text.lower().startswith("sholat "):
+                                location = msg.text.lower().replace("sholat ","")
+                                params = {'lokasi':location}
+                                with requests.session() as web:
+                                    r = requests.get("http://leert.corrykalam.gq/praytime.php?location="+location+"")                      
+                                    data = r.text
+                                    data = json.loads(data)
+                                    if data[1] != "Subuh : " and data[2] != "Dzuhur : " and data[3] != "Ashr : " and data[4] != "Maghrib : " and data[5] != "Isha : ":
+                                        ret_ = "[ Prayer Schedule ]"
+                                        ret_ += "\n\nLocation : " + data[0]
+                                        ret_ += "\n" + data[1]
+                                        ret_ += "\n" + data[2]
+                                        ret_ += "\n" + data[3]               
+                                        ret_ += "\n" + data[4]
+                                        ret_ += "\n" + data[5]
+                                    else:
+                                           ret_ = "[ Prayer Schedule ] Error : Location not found" 
+                                    client.sendMessage(msg.to, str(ret_))
+                                    
                             elif cmd == "autoadd on":
                               if msg._from in admin:
                                 settings["autoAdd"] = True
@@ -857,10 +1401,6 @@ def clientBot(op):
                                             path = str(channel)
                                             client.sendImageWithURL(to, str(path))
 # Pembatas Script #
-                            elif cmd == 'Gcreator':
-                                group = client.getGroup(to)
-                                GS = group.creator.mid
-                                client.sendContact(to, GS)
                             elif cmd == 'groupid':
                                 gid = client.getGroup(to)
                                 client.sendMessage(to, "[ID Group : ]\n" + gid.id)
@@ -1303,7 +1843,7 @@ def clientBot(op):
                                         num += 1
                                         ret_ += "\n╠ {}. {}".format(str(num), str(music["single"]))
                                     ret_ += "\n╚══[ Total {} Music ]".format(str(len(data["result"])))
-                                    ret_ += "\n\nUntuk Melihat Details Music, silahkan gunakan command {}SearchMusic {}|「number」".format(str(setKey), str(search))
+                                    ret_ += "\n\nUntuk Melihat Details Music, silahkan gunakan command /music|「nomor」\nContoh: /music|1"
                                     client.sendMessage(to, str(ret_))
                                 elif len(cond) == 2:
                                     num = int(cond[1])
@@ -1561,7 +2101,83 @@ def clientBot(op):
                 except Exception as error:
                     logError(error)
                     traceback.print_tb(error.__traceback__)
+              
+        if op.type == 55:
+            try:
+                if cctv['cyduk'][op.param1]==True:
+                    if op.param1 in cctv['point']:
+                        Name = client.getContact(op.param2).displayName
+                        if Name in cctv['sidermem'][op.param1]:
+                            pass
+                        else:
+                            cctv['sidermem'][op.param1] += "\n• " + Name
+                            if " " in Name:
+                                nick = Name.split(' ')
+                                if len(nick) == 2:
+                                    client.sendMessage(op.param1, "Haii " + "☞ " + nick[0] + " ☜" + "\nNgintip Aja Niih. . .\nChat Kek Idiih (-__-)   ")
+                                else:
+                                    client.sendMessage(op.param1, "Haii " + "☞ " + nick[1] + " ☜" + "\nBetah Banget Jadi Penonton. . .\nChat Napa (-__-)   ")
+                            else:
+                                client.sendMessage(op.param1, "Haii " + "☞ " + Name + " ☜" + "\nNgapain Kak Ngintip Aja?\nSini Gabung Chat...   ")
+                    else:
+                        pass
+                else:
+                    pass
+            except:
+                pass
                 
+        
+        if op.type == 55:
+            try:
+                if op.param1 in wait2['readPoint']:
+           
+                    if op.param2 in wait2['readMember'][op.param1]:
+                        pass
+                    else:
+                        wait2['readMember'][op.param1] += op.param2
+                    wait2['ROM'][op.param1][op.param2] = op.param2
+                    with open('sider.json', 'w') as fp:
+                     json.dump(wait2, fp, sort_keys=True, indent=4)
+                else:
+                    pass
+            except:
+                pass  
+                
+        if op.type == 55:
+            try:
+                if op.param1 in wait2['readPoint']:
+                    Name = client.getContact(op.param2).displayName
+                    if Name in wait2['readMember'][op.param1]:
+                        pass
+                    else:
+                        wait2['readMember'][op.param1] += "\n☀。" + Name
+                        wait2['ROM'][op.param1][op.param2] = "☠。" + Name
+                else:
+                    client.sendMessage
+            except:
+                  pass
+              
+        if op.type == 26:
+            msg = op.message
+            msg.text = str(msg.text)
+            text = msg.text
+            try:
+                if msg.contentType == 0:
+                    try:
+                        if msg.to in wait2['readPoint']:
+                            if msg.from_ in wait2["ROM"][msg.to]:
+                                del wait2["ROM"][msg.to][msg.from_]
+                        else:
+                            pass
+                    except:
+                        pass
+                else:
+                    pass
+            except KeyboardInterrupt:
+                         sys.exit(0)
+            except Exception as error:
+                return
+            
         if op.type == 55:
             #print ("[ 55 ] NOTIFIED READ MESSAGE")
             try:
