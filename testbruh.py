@@ -134,38 +134,6 @@ wait2 = {
     'ROM':{}
     }
 
-settings = {
-    "userAgent": [
-        "Mozilla/5.0 (X11; U; Linux i586; de; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (X11; U; Linux amd64; rv:5.0) Gecko/20100101 Firefox/5.0 (Debian)",
-        "Mozilla/5.0 (X11; U; Linux amd64; en-US; rv:5.0) Gecko/20110619 Firefox/5.0",
-        "Mozilla/5.0 (X11; Linux) Gecko Firefox/5.0",
-        "Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 FirePHP/0.5",
-        "Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 Firefox/5.0",
-        "Mozilla/5.0 (X11; Linux x86_64) Gecko Firefox/5.0",
-        "Mozilla/5.0 (X11; Linux ppc; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (X11; Linux AMD64) Gecko Firefox/5.0",
-        "Mozilla/5.0 (X11; FreeBSD amd64; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:5.0) Gecko/20110619 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 6.1.1; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 5.2; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 5.1; U; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 5.1; rv:2.0.1) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 5.0; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0",
-        "Mozilla/5.0 (Windows NT 5.0; rv:5.0) Gecko/20100101 Firefox/5.0"
-    ],
-    "timeRestart": "18000",
-    "simiSimi":{},
-    "mimic": {
-        "copy": False,
-        "status": False,
-        "target": {}
-    }
-}
-
 cctv = {
     "cyduk":{},
     "point":{},
@@ -203,7 +171,7 @@ settings = {
     "autoJoinTicket": True,
     "checkContact": False,
     "checkPost": False,
-    "checkSticker": True,
+    "checkSticker": False,
     "changePictureProfile": False,
     "changeGroupPicture": [],
     "keyCommand": "",
@@ -219,7 +187,7 @@ settings = {
         "target": {}
     },
     "setKey": False,
-    "unsendMessage": True
+    "unsendMessage": False
 }
 
 read = {
@@ -742,19 +710,19 @@ def clientBot(op):
                         else:
                             cmd = command(text)
                             if cmd == "help":
-                                client.sendMention(to, helpmess, [sender])
+                                sendMention(to, helpmess, [sender])
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(to, Oa)
                             elif cmd == "/siders":
-                                client.sendMention(to, sidersmess, [sender])
+                                sendMention(to, sidersmess, [sender])
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(to, Oa)
                             elif cmd == "/search":
-                                client.sendMention(to, searchmess, [sender])
+                                sendMention(to, searchmess, [sender])
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(to, Oa)
                             elif cmd == "/group":
-                                client.sendMention(to, groupmess, [sender])
+                                sendMention(to, groupmess, [sender])
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(to, Oa)
                             elif cmd == "tts":
@@ -2226,32 +2194,7 @@ def clientBot(op):
             except Exception as error:
                 logError(error)
                 traceback.print_tb(error.__traceback__)
-        if op.type == 65:
-            print ("[ 65 ] NOTIFIED DESTROY MESSAGE")
-            if settings["unsendMessage"] == True:
-                try:
-                    at = op.param1
-                    msg_id = op.param2
-                    if msg_id in msg_dict:
-                        if msg_dict[msg_id]["from"]:
-                            contact = client.getContact(msg_dict[msg_id]["from"])
-                            if contact.displayNameOverridden != None:
-                                name_ = contact.displayNameOverridden
-                            else:
-                                name_ = contact.displayName
-                                ret_ = "Send Message cancelled."
-                                ret_ += "\nSender : @!"
-                                ret_ += "\nSend At : {}".format(str(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"]))))
-                                ret_ += "\nType : {}".format(str(Type._VALUES_TO_NAMES[msg_dict[msg_id]["contentType"]]))
-                                ret_ += "\nText : {}".format(str(msg_dict[msg_id]["text"]))
-                                sendMention(at, str(ret_), [contact.mid])
-                            del msg_dict[msg_id]
-                        else:
-                            client.sendMessage(at,"SentMessage cancelled,But I didn't have log data.\nSorry > <")
-                except Exception as error:
-                    logError(error)
-                    traceback.print_tb(error.__traceback__)
-              
+        
         if op.type == 55:
             try:
                 if cctv['cyduk'][op.param1]==True:
@@ -2341,10 +2284,10 @@ def clientBot(op):
                    pass
             except Exception as error:
                 logError(error)
-                #traceback.print_tb(error.__traceback__)
+                traceback.print_tb(error.__traceback__)
     except Exception as error:
         logError(error)
-        #traceback.print_tb(error.__traceback__)
+        traceback.print_tb(error.__traceback__)
 
 while True:
     try:
