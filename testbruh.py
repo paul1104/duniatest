@@ -933,7 +933,7 @@ def clientBot(op):
                                 jawaban = random.choice(jawab)
                                 client.sendMessage(msg.to,"Dosanya " + tanya + "adalah " + jawaban + " Banyak banyak tobat Nak ")
 #----------------------
-	                        elif "Pahala @" in msg.text:
+                            elif "Pahala @" in msg.text:
                                 tanya = msg.text.replace("Pahala @","")
                                 jawab = ("0%","20%","40%","50%","60%","Tak ada")
                                 jawaban = random.choice(jawab)
