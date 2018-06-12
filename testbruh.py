@@ -738,7 +738,7 @@ def clientBot(op):
                                  sep = msg.text.split(" ")
                                  ayat = msg.text.lower().replace(sep[0] + " ","")
                                  path = "http://islamcdn.com/quran/media/audio/ayah/ar.alafasy/" + ayat
-                                 sendMentionV2(msg.to, "@! ini ayat yang kamu cari..", [sender])
+                                 sendMention(msg.to, "@! ini ayat yang kamu cari..", [sender])
                                  client.sendAudioWithURL(msg.to, path)
                               except Exception as error:
                                  client.sendMessage(msg.to, str(error))
@@ -1092,8 +1092,8 @@ def clientBot(op):
                                 teks = msg.text.lower().replace("pcid: "+txt[1]+" ","")
                                 x = client.findContactsByUserid(txt[1])
                                 a = client.getContact(msg._from)
-                                sendMentionV2(x.mid,"Anda mendapatkan pesan dari @!\n\n "+teks+"", [a.mid])
-                                sendMentionV2(msg.to,"Sukses mengirim pesan ke @!\nDari: "+a.displayName+"\nPesan: "+teks+"", [x.mid])
+                                sendMention(x.mid,"Anda mendapatkan pesan dari @!\n\n "+teks+"", [a.mid])
+                                sendMention(msg.to,"Sukses mengirim pesan ke @!\nDari: "+a.displayName+"\nPesan: "+teks+"", [x.mid])
                                 Oa = 'ud4082219b6754e7b610f84d07d3b436b'
                                 client.sendContact(msg.to, Oa)
 
