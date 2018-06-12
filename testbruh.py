@@ -844,29 +844,27 @@ def clientBot(op):
                             elif "Sider on" in msg.text:
                               ginfo = client.getGroup(msg.to)
                               gCreator = ginfo.creator.mid
-		           #   if msg._from in gCreator:
-                                try:
-                                    del cctv['point'][msg.to]
-                                    del cctv['sidermem'][msg.to]
-                                    del cctv['cyduk'][msg.to]
-                                except:
-                                    pass
-                                cctv['point'][msg.to] = msg.id
-                                cctv['sidermem'][msg.to] = ""
-                                cctv['cyduk'][msg.to]=True
-                                wait["Sider"] = True
-                                client.sendMessage(msg.to,"Siap On Cek Sider")
+                              try:
+                                  del cctv['point'][msg.to]
+                                  del cctv['sidermem'][msg.to]
+                                  del cctv['cyduk'][msg.to]
+                              except:
+                                  pass
+                              cctv['point'][msg.to] = msg.id
+                              cctv['sidermem'][msg.to] = ""
+                              cctv['cyduk'][msg.to]=True
+                              wait["Sider"] = True
+                              client.sendMessage(msg.to,"Siap On Cek Sider")
                 
                             elif "Sider off" in msg.text:
                               ginfo = client.getGroup(msg.to)
                               gCreator = ginfo.creator.mid
-			   #   if msg._from in gCreator:
-                                if msg.to in cctv['point']:
-                                    cctv['cyduk'][msg.to]=False
-                                    wait["Sider"] = False
-                                    client.sendMessage(msg.to, "Cek Sider Off")
-                                else:
-                                    client.sendMessage(msg.to, "Heh Belom Di Set")
+                              if msg.to in cctv['point']:
+                                  cctv['cyduk'][msg.to]=False
+                                  wait["Sider"] = False
+                                  client.sendMessage(msg.to, "Cek Sider Off")
+                              else:
+                                  client.sendMessage(msg.to, "Heh Belom Di Set")
                     
                             elif "Sider on" in msg.text:
                                 try:
