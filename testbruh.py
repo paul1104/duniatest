@@ -230,7 +230,7 @@ try:
 except:
     print("Couldn't read Log data")
     
-Bots=[mid]
+#Bots=[mid]
 admin=["ub8530f15ff4020c3cc2d1ad2f066aa4b","u5601bdfbc2c67e7adcb95f790127b193"]
 owner=["ub8530f15ff4020c3cc2d1ad2f066aa4b","u5601bdfbc2c67e7adcb95f790127b193"]
 settings["myProfile"]["displayName"] = clientProfile.displayName
@@ -497,7 +497,7 @@ def helptranslate():
 def clientBot(op):
     try:
         if op.type == 0:
-            print ("[ 0 ] END OF OPERATION")
+            #print ("[ 0 ] END OF OPERATION")
             return
 
         if op.type == 5:
@@ -511,6 +511,7 @@ def clientBot(op):
         if op.type == 13:
             print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
             if clientMid in op.param3:
+                G = client.getGroup(op.param1)
                 if settings["autoJoin"] == True:
                     if settings["autoCancel"]["on"] == True:
                         if len(G.members) <= settings["autoCancel"]["members"]:
@@ -535,7 +536,7 @@ def clientBot(op):
 
         if op.type == 26:
             try:
-                print ("[ 26 ] SEND MESSAGE")
+                #print ("[ 26 ] SEND MESSAGE")
                 msg = op.message
                 text = msg.text
                 msg_id = msg.id
@@ -1472,7 +1473,7 @@ def clientBot(op):
                 
         if op.type == 26:
             try:
-                print ("[ 26 ] RECIEVE MESSAGE")
+                #print ("[ 26 ] RECIEVE MESSAGE")
                 msg = op.message
                 text = msg.text
                 msg_id = msg.id
@@ -1562,7 +1563,7 @@ def clientBot(op):
                     traceback.print_tb(error.__traceback__)
                 
         if op.type == 55:
-            print ("[ 55 ] NOTIFIED READ MESSAGE")
+            #print ("[ 55 ] NOTIFIED READ MESSAGE")
             try:
                 if op.param1 in read['readPoint']:
                     if op.param2 in read['readMember'][op.param1]:
