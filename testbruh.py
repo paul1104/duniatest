@@ -21,6 +21,68 @@ botStart = time.time()
 
 msg_dict = {}
 
+helpmess = """╔══『 Menu Kaneki 』
+╠ ⌬ 「/siders」
+╠ ⌬ 「/search」
+╠ ⌬ 「/about」
+╠ ⌬ 「/group」
+╠ ⌬ 「/keluar」
+╚══『 Menu Kaneki 』"""
+
+sidersmess = """╔══『 Menu Siders 』
+╠ ⌬ 「Lurking On」= nyalakan dulu
+╠ ⌬ 「Lurking」 = melihatkan siders
+╠ ⌬ 「Lurking Off」= matikan
+╠═「Lurking On > Lurking > Lurking Off/Lurking Reset」
+╠═══════════════════
+╠ ⌬ 「Sider On」= otomatis
+╠ ⌬ 「Sider Off」= otomatis
+╚══『 Menu Kaneki 』"""
+
+searchmess = """╔══『 Menu Search 』
+╠ ⌬ 「Ayat: [ayat keberapa]」
+╠ ⌬ 「Jadwal: [nama channel]」
+╠ ⌬ 「Call: [nomor hp]」
+╠ ⌬ 「Meme: [text 1] [text 2]」
+╠ ⌬ 「Retro: [text 1] [text 2]」
+╠ ⌬ 「Neon: [text]」
+╠ ⌬ 「ytmp3: [link vid yt]」
+╠═══════════════════
+╠ ⌬ 「Tts」= Berbicara sesuai bahasa
+╠ ⌬ 「Translate」 = Translate
+╠ ⌬ 「Speed」= Kecepatan Bot
+╠ ⌬ 「Runtime」= Bot berjalan selama
+╠═══════════════════
+╠ ⌬ 「/screen [link nya] 」
+╠ ⌬ 「/cek [tgl-bln-thn]」
+╠ ⌬ 「/image [nama target]」
+╠ ⌬ 「/music [nama lagu]」
+╠ ⌬ 「/yt [nama video]」
+╠═══════════════════
+╠ ⌬ 「instapost username|keberapa」
+╠ ⌬ 「instastory username|keberapa」 
+╚══『 Menu Kaneki 』"""
+
+groupmess = """╔══『 Menu Group 』
+╠ ⌬ 「Cgp」= change foto group
+╠ ⌬ 「Mention」= tag all
+╠═══════════════
+╠ ⌬ 「Pcid: [id target] [isi pesan]」
+╠ ⌬ 「Apakah [pertanyaan]?」
+╠ ⌬ 「Dosa @[tag target]」
+╠ ⌬ 「Pahala @[tag target]」
+╠═══════════════
+╠ ⌬ 「Gcreator」
+╠ ⌬ 「Grouppicture」
+╠ ⌬ 「Groupticket」
+╠ ⌬ 「Groupinfo」
+╠ ⌬ 「Listmember」
+╠ ⌬ 「Result」
+╠════════════════
+╠ ⌬ 「/curidp @[tag target]」
+╠ ⌬ 「/curicover @[tag target]」
+╚══『 Menu Kaneki 』"""
+
 wait = {
     'contact':False,
     'autoJoin':True,
