@@ -33,8 +33,7 @@ sidersmess = """╔══『 Menu Siders 』
 ╠ ⌬ 「Lurking On」= nyalakan dulu
 ╠ ⌬ 「Lurking」 = melihatkan siders
 ╠ ⌬ 「Lurking Off」= matikan
-╠═「Lurking On > Lurking > Lurking Off/Lurking Reset」
-╠═══════════════════
+╠════════════════
 ╠ ⌬ 「Sider On」= otomatis
 ╠ ⌬ 「Sider Off」= otomatis
 ╚══『 Menu Kaneki 』\n @!"""
@@ -47,18 +46,18 @@ searchmess = """╔══『 Menu Search 』
 ╠ ⌬ 「Retro: [text 1] [text 2]」
 ╠ ⌬ 「Neon: [text]」
 ╠ ⌬ 「ytmp3: [link vid yt]」
-╠═══════════════════
+╠═══════════════
 ╠ ⌬ 「Tts」= Berbicara sesuai bahasa
 ╠ ⌬ 「Translate」 = Translate
 ╠ ⌬ 「Speed」= Kecepatan Bot
 ╠ ⌬ 「Runtime」= Bot berjalan selama
-╠═══════════════════
+╠═══════════════
 ╠ ⌬ 「/screen [link nya] 」
 ╠ ⌬ 「/cek [tgl-bln-thn]」
 ╠ ⌬ 「/image [nama target]」
 ╠ ⌬ 「/music [nama lagu]」
 ╠ ⌬ 「/yt [nama video]」
-╠═══════════════════
+╠═══════════════
 ╠ ⌬ 「instapost username|keberapa」
 ╠ ⌬ 「instastory username|keberapa」 
 ╚══『 Menu Kaneki 』\n @!"""
