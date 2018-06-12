@@ -27,7 +27,7 @@ helpmess = """╔══『 Menu Kaneki 』
 ╠ ⌬ 「/about」
 ╠ ⌬ 「/group」
 ╠ ⌬ 「/keluar」
-╚══『 Menu Kaneki 』"""
+╚══『 Menu Kaneki 』\n @!"""
 
 sidersmess = """╔══『 Menu Siders 』
 ╠ ⌬ 「Lurking On」= nyalakan dulu
@@ -37,7 +37,7 @@ sidersmess = """╔══『 Menu Siders 』
 ╠═══════════════════
 ╠ ⌬ 「Sider On」= otomatis
 ╠ ⌬ 「Sider Off」= otomatis
-╚══『 Menu Kaneki 』"""
+╚══『 Menu Kaneki 』\n @!"""
 
 searchmess = """╔══『 Menu Search 』
 ╠ ⌬ 「Ayat: [ayat keberapa]」
@@ -61,7 +61,7 @@ searchmess = """╔══『 Menu Search 』
 ╠═══════════════════
 ╠ ⌬ 「instapost username|keberapa」
 ╠ ⌬ 「instastory username|keberapa」 
-╚══『 Menu Kaneki 』"""
+╚══『 Menu Kaneki 』\n @!"""
 
 groupmess = """╔══『 Menu Group 』
 ╠ ⌬ 「Cgp」= change foto group
@@ -81,7 +81,7 @@ groupmess = """╔══『 Menu Group 』
 ╠════════════════
 ╠ ⌬ 「/curidp @[tag target]」
 ╠ ⌬ 「/curicover @[tag target]」
-╚══『 Menu Kaneki 』"""
+╚══『 Menu Kaneki 』\n @!"""
 
 wait = {
     'contact':False,
@@ -742,8 +742,21 @@ def clientBot(op):
                         else:
                             cmd = command(text)
                             if cmd == "help":
-                                helpMessage = helpmessage()
-                                client.sendMessage(to, str(helpMessage))
+				client.sendMention(to, helpmess, [sender])
+				Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+				client.sendContact(to, Oa)
+			    elif cmd == "/siders":
+				client.sendMention(to, sidersmess, [sender])
+				Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+				client.sendContact(to, Oa)
+			    elif cmd == "/search":
+				client.sendMention(to, searchmess, [sender])
+				Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+				client.sendContact(to, Oa)
+			    elif cmd == "/group":
+				client.sendMention(to, groupmess, [sender])
+				Oa = 'ud4082219b6754e7b610f84d07d3b436b'
+				client.sendContact(to, Oa)
                             elif cmd == "tts":
                                 helpTextToSpeech = helptexttospeech()
                                 client.sendMessage(to, str(helpTextToSpeech))
