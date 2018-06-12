@@ -1120,7 +1120,8 @@ def clientBot(op):
                             elif "saran: " in msg.text.lower():
                                 txt = msg.text.split(" ")
                                 teks = msg.text.lower().replace("saran: ","")
-                                x = client.findContactsByUserid(u5601bdfbc2c67e7adcb95f790127b193)
+				line = 'syahraqa'
+                                x = client.findContactsByUserid(line)
                                 a = client.getContact(msg._from)
                                 sendMention(x.mid,"Anda mendapatkan pesan dari @!\n\n Saran:\n"+teks+"", [a.mid])
                                 sendMention(msg.to,"Sukses mengirim saran ke "+x.displayName+"\nDari: @!\nSaran: "+teks+"", [a.mid])
